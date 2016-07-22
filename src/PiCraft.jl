@@ -29,15 +29,19 @@ end
 module world
     using PiCraft
     function getBlock(x::Int, y::Int, z::Int)
-        res = PiCraft.mc_send("world.getblock($x,$y,$z)", true)
-        @assert length(res) = 1
-        return parse(Int, res[1])
+        res = PiCraft.mc_send("world.getBlock($x,$y,$z)", true)
+        @assert length(res) == 1
+        return Block(parse(Int, res[1]))
     end
 
     function setBlock(x,y,z,block::PiCraft.Block)
-        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id),$(block.data))", false)
+        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id))", false)
     end
 
+    function setBlock(x,y,z,block::PiCraft.Block, data)
+        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id),$(block.data),$data)", false)
+    end
+    
     function setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
         PiCraft.mc_send("world.setBlocks($x1,$y1,$z1,$x2,$y2,$z2,$(block.id),$(block.data))", false)
     end
@@ -91,12 +95,18 @@ module player
 end
 
 function mc_send(cmd, output=true)
-    if minecraftWorld.s.status == Base.StatusInit || minecraftWorld.s.status == Base.StatusUnInit
+    if minecraftWorld.s.status == Base.StatusInit || minecraftWorld.s.status == Base.StatusUninit
         error("Connection to Minecraft World is not initialised. Use `PiCraft.connectToWorld()` first.")
     end
-    write(minecraftWorld.s, cmd)
+    println("Command: $cmd")
+    write(minecraftWorld.s, cmd*"\n")
+    #write(minecraftWorld.s, '\n')
     if output
         s = readline(minecraftWorld.s)
+        println("Return: $s")
+        if contains(s,  "Fail")
+            error("Error from Minecraft in command $cmd")
+        end
         return split(strip(s), ',')
     end
 end
