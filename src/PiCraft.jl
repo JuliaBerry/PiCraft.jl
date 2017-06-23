@@ -2,7 +2,7 @@ module PiCraft
 
 include("blocks.jl")
 
-export world, player, chat, Block
+export world, player, chat, Block, find_item
 
 # package code goes here
 
@@ -41,7 +41,7 @@ module world
     function setBlock(x,y,z,block::PiCraft.Block, data)
         PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id),$(block.data),$data)", false)
     end
-    
+
     function setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
         PiCraft.mc_send("world.setBlocks($x1,$y1,$z1,$x2,$y2,$z2,$(block.id),$(block.data))", false)
     end
