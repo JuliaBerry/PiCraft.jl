@@ -74,9 +74,9 @@ module player
     function getTile()
         res = PiCraft.mc_send("player.getTile()", true)
         @assert length(res) == 3
-        return (parse(Int, res[1]),
+        return [parse(Int, res[1]),
                 parse(Int, res[2]),
-                parse(Int, res[3]))
+                parse(Int, res[3])]
     end
 
     function setTile(x::Int, y::Int, z::Int)
