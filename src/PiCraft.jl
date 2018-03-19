@@ -74,9 +74,9 @@ module player
     function getTile()
         res = PiCraft.mc_send("player.getTile()", true)
         @assert length(res) == 3
-        return [parse(Int, res[1]),
+        return (parse(Int, res[1]),
                 parse(Int, res[2]),
-                parse(Int, res[3])]
+                parse(Int, res[3]))
     end
 
     function setTile(x::Int, y::Int, z::Int)
@@ -86,12 +86,13 @@ module player
     function getPos()
         res = PiCraft.mc_send("player.getPos()", true)
         @assert length(res) == 3
-        return [parse(Float64, res[1]),
+        return (parse(Float64, res[1]),
                 parse(Float64, res[2]),
-                parse(Float64, res[3])]
+                parse(Float64, res[3]))
     end
 
     function setPos(xf::Float64, yf::Float64, zf::Float64)
+
         PiCraft.mc_send("player.setPos($xf,$yf,$zf)")
     end
 
