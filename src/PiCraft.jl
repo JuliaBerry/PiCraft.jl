@@ -28,7 +28,8 @@ end
 
 module world
     using PiCraft
-    function getBlock(x::Int, y::Int, z::Int)
+    function getBlock(x, y, z)
+        (x, y, z) = (floor(Int64, x), floor(Int64, y), floor(Int64,z))
         res = PiCraft.mc_send("world.getBlock($x,$y,$z)", true)
         @assert length(res) == 1
         return Block(parse(Int, res[1]))
@@ -39,10 +40,12 @@ module world
     end
 
     function setBlock(x,y,z,block::PiCraft.Block, data)
+        (x, y, z) = (floor(Int64, x), floor(Int64, y), floor(In64, z))
         PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id),$(block.data),$data)", false)
     end
 
     function setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
+        (x1, y1, z1, x2, y2, z2) = (floor(x1), floor(y1), floor(z1), floor(x2), floor(y2), floor(z2))
         PiCraft.mc_send("world.setBlocks($x1,$y1,$z1,$x2,$y2,$z2,$(block.id),$(block.data))", false)
     end
 
@@ -89,6 +92,7 @@ module player
     end
 
     function setPos(xf::Float64, yf::Float64, zf::Float64)
+
         PiCraft.mc_send("player.setPos($xf,$yf,$zf)")
     end
 
@@ -98,7 +102,7 @@ function mc_send(cmd, output=true)
     if minecraftWorld.s.status == Base.StatusInit || minecraftWorld.s.status == Base.StatusUninit
         error("Connection to Minecraft World is not initialised. Use `PiCraft.connectToWorld()` first.")
     end
-    println("Command: $cmd")
+    #println("Command: $cmd")
     write(minecraftWorld.s, cmd*"\n")
     #write(minecraftWorld.s, '\n')
     if output
