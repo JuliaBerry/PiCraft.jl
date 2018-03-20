@@ -80,7 +80,7 @@ module player
     end
 
     function setTile(x::Int, y::Int, z::Int)
-        PiCraft.mc_send("player.setTile($x,$y,$z)")
+        PiCraft.mc_send("player.setTile($x,$y,$z)", false)
     end
 
     function getPos()
@@ -93,7 +93,7 @@ module player
 
     function setPos(xf::Float64, yf::Float64, zf::Float64)
 
-        PiCraft.mc_send("player.setPos($xf,$yf,$zf)")
+        PiCraft.mc_send("player.setPos($xf,$yf,$zf)", false)
     end
 
 end
