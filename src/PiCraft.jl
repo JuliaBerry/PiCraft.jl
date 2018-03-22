@@ -36,12 +36,12 @@ module world
     end
 
     function setBlock(x,y,z,block::PiCraft.Block)
-        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id))", false)
+        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id), $(block.data))", false)
     end
 
     function setBlock(x,y,z,block::PiCraft.Block, data)
         (x, y, z) = (floor(Int64, x), floor(Int64, y), floor(In64, z))
-        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id),$(block.data),$data)", false)
+        PiCraft.mc_send("world.setBlock($x,$y,$z,$(block.id),$data)", false)
     end
 
     function setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
