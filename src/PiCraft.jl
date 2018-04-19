@@ -42,6 +42,7 @@ module world
 
     setBlock(pos::Tuple{Real, Real, Real},block::PiCraft.Block, data) = setBlock(pos,Block(block.id, data))
     setBlock(x,y,z,block::PiCraft.Block) = setBlock((x,y,z), block)
+
     setBlock(x,y,z,block::PiCraft.Block, data) = setBlock((x,y,z),Block(block.id, data))
 
     function setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
