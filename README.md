@@ -16,8 +16,6 @@ Officially the ability to communicate with the Minecraft world is only available
 - "RaspberryJamMod" is a Forge Mod, if you wish to use this along with other Forge mods then this is recommended. Installation instructions are available [here](http://www.instructables.com/id/Python-coding-for-Minecraft/).
 - "RaspberryJuice" is a Bukkit server plugin, recommended if you wish to work on a Bukkit Minecraft server. Get it [here](https://dev.bukkit.org/projects/raspberryjuice).
 
-There is a disagreement in the coordinates reported by Minecraft's debug mode and the `player.getPos()` command. Enter `/setworldspawn 0 0 0` in the Minecraft console to remove this discrepancy.
-
 ### Get Julia
 
 Download the appropriate Julia version for your system from [here](https://julialang.org/downloads/).
