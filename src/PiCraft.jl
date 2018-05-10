@@ -2,7 +2,9 @@ module PiCraft
 
 include("blocks.jl")
 
-export world, player, chat, Block, find_item
+export World, Block, connectToWorld, mc_send, getBlock, setBlock, setBlocks, getHeight, getPlayerIds
+export setting, save, restore, post, getTile, setTile, getPos, setPos, pollBlockHits
+export clearEvents, camera
 
 type World
     s::TCPSocket
@@ -11,7 +13,7 @@ type World
             s=connect("localhost", 4711)
             new(s)
         catch
-            warn("Unable to connect to Minecraft World. Use `PiCraft.connectToWorld()` after starting Minecraft")
+            warn("Unable to connect to Minecraft World. Use `connectToWorld()` after starting Minecraft")
             new(TCPSocket())
         end
     end
@@ -19,84 +21,16 @@ end
 
 global const minecraftWorld = World()
 
-function connectToWorld()
-    sock=connect("localhost", 4711)
-    minecraftWorld.s = sock
-end
-
-module world
-    using PiCraft
-
-    function getBlock(pos::Tuple{Real, Real, Real})
-        pos = floor.(Int64, pos)
-        res = PiCraft.mc_send("world.getBlockWithData($(pos[1]),$(pos[2]),$(pos[3]))", true)
-        return Block(parse(Int, res[1]), (parse(Int, res[2])))
-    end
-
-    getBlock(x, y, z) = getBlock((x,y,z))
-
-    function setBlock(pos::Tuple{Real, Real, Real},block::PiCraft.Block)
-        pos = floor.(Int, pos)
-        PiCraft.mc_send("world.setBlock($(pos[1]),$(pos[2]),$(pos[3]),$(block.id),$(block.data))", false)
-    end
-
-    setBlock(pos::Tuple{Real, Real, Real},block::PiCraft.Block, data) = setBlock(pos,Block(block.id, data))
-    setBlock(x,y,z,block::PiCraft.Block) = setBlock((x,y,z), block)
-    setBlock(x,y,z,block::PiCraft.Block, data) = setBlock((x,y,z),Block(block.id, data))
-
-    function setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
-        (x1, y1, z1, x2, y2, z2) = (floor(x1), floor(y1), floor(z1), floor(x2), floor(y2), floor(z2))
-        PiCraft.mc_send("world.setBlocks($x1,$y1,$z1,$x2,$y2,$z2,$(block.id),$(block.data))", false)
-    end
-
-    function getHeight(x::Int,z::Int)
-        res = PiCraft.mc_send("world.getHeight($x,$z), true")
-        @assert length(res) == 1
-        return parse(Int, res[1])
-    end
-
-    module checkpoint
-        using PiCraft
-        save() = PiCraft.mc_send("world.checkpoint.save()", false)
-        restore() = PiCraft.mc_send("world.checkpoint.restore()", false)
+function connectToWorld(address = "localhost", port = 4711)
+    try
+        sock=connect(address, port) && info("Successfully connected to the Minecraft World.")
+        minecraftWorld.s = sock
+    catch
+        error("Unable to connect to the Minecraft World.")
     end
 end
 
-module chat
-    using PiCraft
-    function post(s)
-        PiCraft.mc_send("chat.post($(string(s)))", false)
-    end
-end
-
-module player
-    using PiCraft
-    function getTile()
-        res = PiCraft.mc_send("player.getTile()", true)
-        @assert length(res) == 3
-        return (parse(Int, res[1]),
-                parse(Int, res[2]),
-                parse(Int, res[3]))
-    end
-
-    function setTile(x::Int, y::Int, z::Int)
-        PiCraft.mc_send("player.setTile($x,$y,$z)", false)
-    end
-
-    function getPos()
-        res = PiCraft.mc_send("player.getPos()", true)
-        @assert length(res) == 3
-        return (parse(Float64, res[1]),
-                parse(Float64, res[2]),
-                parse(Float64, res[3]))
-    end
-
-    function setPos(xf::Float64, yf::Float64, zf::Float64)
-        PiCraft.mc_send("player.setPos($xf,$yf,$zf)", false)
-    end
-
-end
-
+"Communicate with the Minecraft API"
 function mc_send(cmd, output=true)
     if minecraftWorld.s.status == Base.StatusInit || minecraftWorld.s.status == Base.StatusUninit
         error("Connection to Minecraft World is not initialised. Use `PiCraft.connectToWorld()` first.")
@@ -110,6 +44,123 @@ function mc_send(cmd, output=true)
         end
         return split(strip(s), ',')
     end
+end
+
+"Get the Block information from the specified coordinates."
+function getBlock(pos::Tuple{Real, Real, Real})
+    pos = round.(Int, pos)
+    res = PiCraft.mc_send("world.getBlockWithData($(pos[1]),$(pos[2]),$(pos[3]))", true)
+    return Block(parse(Int, res[1]), (parse(Int, res[2])))
+end
+
+"Place the specified `Block` at the given coordinates"
+function setBlock(pos::Tuple{Real, Real, Real}, block::Block)
+    pos = round.(Int, pos)
+    PiCraft.mc_send("world.setBlock($(pos[1]),$(pos[2]),$(pos[3]),$(block.id),$(block.data))", false)
+end
+
+"Set an entire region to the specified block type"
+function setBlocks(pos::Tuple{UnitRange{Int}, UnitRange{Int}, UnitRange{Int}}, block::Block)
+    PiCraft.mc_send("world.setBlocks($(pos[1][1]),$(pos[2][1]),$(pos[3][1]),$(pos[1][end]),$(pos[2][end]),$(pos[3][end]),$(block.id),$(block.data))", false)
+end
+
+"Get the height of the world at the specified `x` and `z` coordinates."
+function getHeight(x::Int, z::Int)
+    h = PiCraft.mc_send("world.getHeight($x,$z)", true)
+    return parse(Int, h[1])
+end
+
+"Return an array of all Player Id's connected to the server."
+function getPlayerIds()
+    return parse.(Int,PiCraft.mc_send("world.getPlayerIds()"))
+end
+
+setting(name, status) = PiCraft.mc_send("world.setting($(name),$(status))", false)
+
+"Save the World's progress"
+save() = PiCraft.mc_send("world.checkpoint.save()", false)
+
+"Restore the world to the previous savepoint."
+restore() = PiCraft.mc_send("world.checkpoint.restore()", false)
+
+"Post a message to chat"
+post(s::String) = PiCraft.mc_send("chat.post($(s)", false)
+
+"Return the tile's coordinates on which the player is standing."
+function getTile()
+    pos = PiCraft.mc_send("player.getTile()", true)
+    return tuple(parse.(Int,pos)...)
+end
+
+"Teleport the player on top of the specified tile"
+function setTile(pos::Tuple{Real, Real, Real})
+    pos = round.(Int, pos)
+    PiCraft.mc_send("player.setTile($(pos[1]),$(pos[2]),$(pos[3]))", false)
+end
+
+"Return the player's coordinates"
+function getPos()
+    pos = PiCraft.mc_send("player.getPos()", true)
+    return tuple(parse.(Float64, pos)...)
+end
+
+"Teleport the player to the specified coordinates"
+setPos(pos::Tuple{Real, Real, Real}) = PiCraft.mc_send("player.setPos($(pos[1]),$(pos[2]),$(pos[3]))", false)
+
+#Entity Commands
+function getTile(entityId::Int)
+    pos = PiCraft.mc_send("player.getTile($(entityId))", true)
+    return tuple(parse.(Int, pos)...)
+end
+
+function setTile(entityId::Int, pos::Tuple{Real, Real, Real})
+    pos = round.(Int,pos)
+    PiCraft.mc_send("player.setTile($(entityId),$(pos[1]),$(pos[2]),$(pos[3]))", false)
+end
+
+function getPos(entityId::Int)
+    pos = PiCraft.mc_send("player.getPos($(entityId))", true)
+    return tuple(parse.(Float64, pos)...)
+end
+
+function setPos(entityId::Int, x::Real, y::Real, z::Real)
+    PiCraft.mc_send("player.setPos($(entityId),$x,$y,$z)", false)
+end
+
+"""
+    pollBlockHits()
+
+Returns an array of all the events which have occurred since the last time the function was called.
+Each event is described with a tuple `(x, y, z, face, entityId)`. `x`, `y` and `z` are the coordinates of the block.
+`face` is the block's face number which was hit and `entityId` identifies the player who hit the block using a sword.
+
+"""
+function pollBlockHits()
+    rawEvents = []
+    for s in PiCraft.mc_send("events.block.hits()", true)
+        for j in split(s, "|")
+            push!(rawEvents, parse(Int,j))
+        end
+    end
+    Events = []
+    for i in 0:(Int(length(rawEvents)/5) - 1)
+        push!(Events, (rawEvents[1 + 5*i], rawEvents[2 + 5*i], rawEvents[3 + 5*i], rawEvents[4 + 5*i], rawEvents[5 + 5*i]))
+    end
+    return Events
+end
+
+"Clear all events in the buffer"
+clearEvents() = PiCraft.mc_send("events.clear()", false)
+
+# Camera functions, Only supported by Minecraft: Pi Edition
+module camera
+    using PiCraft
+
+    setNormal(entityId::Int) = PiCraft.mc_send("camera.mode.setNormal($(entityId))", false)
+    setFixed() = PiCraft.mc_send("camera.mode.setFixed()", false)
+    setFollow(entityId::Int) = PiCraft.mc_send("camera.mode.setFollow($(entityId))", false)
+    setPos(pos::Tuple{Real, Real, Real}) = PiCraft.mc_send("camera.setPos($(pos[1]),$(pos[2]),$(pos[3]))", false)
+
 end
 
 end # module
