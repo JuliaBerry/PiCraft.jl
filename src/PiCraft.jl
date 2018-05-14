@@ -3,7 +3,7 @@ module PiCraft
 include("blocks.jl")
 
 export World, Block, connectToWorld, mc_send, getBlock, setBlock, setBlocks, getHeight, getPlayerIds
-export setting, save, restore, post, getTile, setTile, getPos, setPos, pollBlockHits
+export setting, saveWorld, restoreWorld, post, getTile, setTile, getPos, setPos, pollBlockHits
 export clearEvents, camera
 
 type World
@@ -78,10 +78,10 @@ end
 setting(name, status) = PiCraft.mc_send("world.setting($(name),$(status))", false)
 
 "Save the World's progress"
-save() = PiCraft.mc_send("world.checkpoint.save()", false)
+saveWorld() = PiCraft.mc_send("world.checkpoint.save()", false)
 
 "Restore the world to the previous savepoint."
-restore() = PiCraft.mc_send("world.checkpoint.restore()", false)
+restoreWorld() = PiCraft.mc_send("world.checkpoint.restore()", false)
 
 "Post a message to chat"
 post(s::String) = PiCraft.mc_send("chat.post($(s)", false)
