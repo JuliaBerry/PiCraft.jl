@@ -9,38 +9,58 @@ Order   = [:type, :function]
 ```
 
 ```@docs
-world.getBlock(x, y, z)
+getBlock(Tuple{Int,Int,Int})
 ```
 
 
 ```@docs
-world.setBlock(x, y, z, block)
+setBlock(Tuple{Int,Int,Int}, block::Picraft.Block)
 ```
 
 ```@docs
-world.setBlocks(x1,y1,z1,x2,y2,z2,block::PiCraft.Block)
+setBlocks(pos::Tuple{UnitRange{Int}, UnitRange{Int}, UnitRange{Int}}, block::PiCraft.Block)
 ```
 
 ```@docs
-world.checkpoint.save()
+getHeight(x::Int,z::Int)
 ```
 
 ```@docs
-world.checkpoint.restore()
-```
-
-
-```@docs
-chat.post(s)
+getPlayerIds()
 ```
 
 
 ```@docs
-player.getTile()
+getPlayerIds()
+```
+
+
+```@docs
+setting(name, status)
+```
+
+
+```@docs
+save()
+```
+
+
+```@docs
+restore()
+```
+
+
+```@docs
+post(s::string)
+```
+
+
+```@docs
+getTile()
 ```
 
 ```@docs
-player.setTile(x, y, z)
+setTile(pos::Tuple{Real, Real, Real})
 ```
 
 ```@docs
@@ -48,5 +68,5 @@ player.getPos()
 ```
 
 ```@docs
-player.setPos(x, y, z)
+setPos(pos::Tuple{Real, Real, Real})
 ```
