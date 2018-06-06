@@ -19,15 +19,7 @@ mutable struct turtle
     stepSize::Float64
     penDown::Bool
 
-    function turtle()
-        pos = getPos()
-        direction = [1.0; 0.0; 0.0]
-        normal = [0.0; -1.0; 0.0]
-        penBlock = Block(41)
-        stepSize = 0.3
-        penDown = true
-        return new(pos, direction, normal, penBlock, stepSize, penDown)
-    end
+    turtle(;pos = getPos(), direction = [1.0; 0.0; 0.0], normal = [0.0; -1.0; 0.0], penBlock = Block(41), stepSize = 0.5, penDown = true) = new(pos, direction, normal, penBlock, stepSize, penDown)
 end
 
 """
