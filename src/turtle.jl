@@ -35,7 +35,8 @@ end
 
 Move the turtle `t` forward `s` steps.
 """
-function move(t::turtle, s::Int)
+function move(t::turtle, s::Real)
+    s = floor(Int, s)
     for i in 1:s
         t.penDown && setBlock(t.pos, t.penBlock)
         t.pos = t.pos .+ Tuple(t.direction*t.stepSize)
