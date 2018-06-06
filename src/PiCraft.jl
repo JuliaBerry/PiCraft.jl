@@ -1,10 +1,12 @@
 module PiCraft
 
 include("blocks.jl")
+include("turtle.jl")
 
 export World, Block, connectToWorld, mc_send, getBlock, setBlock, setBlocks, getHeight, getPlayerIds
 export setting, saveWorld, restoreWorld, post, getTile, setTile, getPos, setPos, pollBlockHits
 export clearEvents, camera
+export turtle, move, yaw, pitch, roll
 
 type World
     s::TCPSocket
