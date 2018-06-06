@@ -4,12 +4,14 @@
 A graphics turtle meant to move in all 3-Dimensions. It contains the following fields:
 
 * `pos` : The coordinates of the turtle.
-* `direction` : The direction in which the turtle is facing.
-* `normal` : The direction normal to the turtle's body.
+* `direction` : The Roll Axis - direction in which the turtle is facing.
+* `normal` : The Yaw axis - direction normal to the turtle's body.
 * `penBlock` : The block which will be used to draw.
 * `stepSize` : The size of a turtle's step.
 * `penDown` : Activation state of `penBlock`.
 
+The default constructor initializes the `turtle` at the player's position,roll axis is the positive x-direction,
+with the yaw axis pointing downwards. `penBlock` is gold by default and is activated with the `stepSize` = 0.5
 """
 mutable struct turtle
     pos::Tuple{Float64, Float64, Float64}
