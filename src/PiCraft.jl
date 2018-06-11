@@ -133,7 +133,7 @@ end
     pollBlockHits()
 
 Returns an array of all the events which have occurred since the last time the function was called.
-Each event is described with a tuple `(x, y, z, face, entityId)`. `x`, `y` and `z` are the coordinates of the block.
+Each event is described with a tuple `((x, y, z), face, entityId)`. `x`, `y` and `z` are the coordinates of the block.
 `face` is the block's face number which was hit and `entityId` identifies the player who hit the block using a sword.
 
 """
@@ -141,12 +141,12 @@ function pollBlockHits()
     rawEvents = []
     for s in PiCraft.mc_send("events.block.hits()", true)
         for j in split(s, "|")
-            push!(rawEvents, parse(Int,j))
+            length(j) > 0 && push!(rawEvents, parse(Int,j))
         end
     end
     Events = []
     for i in 0:(Int(length(rawEvents)/5) - 1)
-        push!(Events, (rawEvents[1 + 5*i], rawEvents[2 + 5*i], rawEvents[3 + 5*i], rawEvents[4 + 5*i], rawEvents[5 + 5*i]))
+        push!(Events, ( (rawEvents[1 + 5*i], rawEvents[2 + 5*i], rawEvents[3 + 5*i]) , rawEvents[4 + 5*i], rawEvents[5 + 5*i]))
     end
     return Events
 end
