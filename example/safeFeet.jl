@@ -1,10 +1,14 @@
+# Walk over water and air by replacing it with Dimaond Blocks
+# Usage:
+#   t = now()
+#   while (now() - t).value/1000 < 60
+#       safeFeet()
+#    end
+
 
 function safeFeet()
-    x,y,z = player.getTile()
-    b = world.getBlock(x,y-1, z)
-    if b == PiCraft.AIR || b == PiCraft.WATER_STATIONARY || b == PiCraft.WATER_FLOWING
-        world.setBlock(x, y-1, z, PiCraft.DIAMOND_BLOCK, 1)
-    end
+   b = getTile() .+ (0, -1, 0)
+   if getBlock(b) ∈  [PiCraft.AIR, PiCraft.WATER_STATIONARY, PiCraft.WATER_FLOWING]
+       setBlock(b, PiCraft.DIAMOND_BLOCK)
+   end
 end
-    
-        
