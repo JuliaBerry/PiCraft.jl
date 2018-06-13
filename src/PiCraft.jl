@@ -62,8 +62,10 @@ function setBlock(pos::Tuple{Real, Real, Real}, block::Block)
 end
 
 "Set an entire region to the specified block type"
-function setBlocks(pos::Tuple{UnitRange{Int}, UnitRange{Int}, UnitRange{Int}}, block::Block)
-    PiCraft.mc_send("world.setBlocks($(pos[1][1]),$(pos[2][1]),$(pos[3][1]),$(pos[1][end]),$(pos[2][end]),$(pos[3][end]),$(block.id),$(block.data))", false)
+function setBlocks(s::Tuple{Real, Real, Real}, e::Tuple{Real, Real, Real}, block::Block)
+    s = round.(Int, s)
+    e = round.(Int, e)
+    PiCraft.mc_send("world.setBlocks($(s[1]),$(s[2]),$(s[3]),$(e[1]),$(e[2]),$(e[3]),$(block.id),$(block.data))", false)
 end
 
 "Get the height of the world at the specified `x` and `z` coordinates."
