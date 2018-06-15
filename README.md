@@ -90,5 +90,5 @@ getTile() # return a tuple of integers (x, y, z),  for the tile on which the pla
 setTile(pos::Tuple{Real, Real, Real}) # move the player to the tile specified by the integer coordinates
 getPos() # return a tuple of floats (x, y, z) with the player's position
 setPos(pos::Tuple{Real, Real, Real}) # move the player to the specified coordinates
-
+pollBlockHits() #Return an Array of hit events. ((x,y,z), faceId, entityId)
 ```
