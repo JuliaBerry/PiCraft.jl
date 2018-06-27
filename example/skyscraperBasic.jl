@@ -66,8 +66,7 @@ function makeSkyscraper2()
     for i in 0:floors
         setBlocks(p .+ (2, height*i, 2), p .+ (length - 1, height*i, width - 1), PiCraft.WOOD_PLANKS)
     end
-    # Add window Panes, careful if you change the given building dimensions, the change in coordinates may result
-    # in unintended consequences.
+    # Add window Panes, careful when changing building dimensions
     for i in 0:(floors - 1)
         setBlocks(p .+ (1, height*i + 2, floor.((width + 1)/2 - 2)),
         p .+ (1, height*i + 4, floor.((width + 1)/2 + 2)), PiCraft.GLASS_PANE)
@@ -79,12 +78,3 @@ end
 # In our second iteration we made the building better, the code is easier to
 # follow through and is less in comparison.
 # Now, experiment around writing your own code architecturing your own designs.
-# Check out the challenges listed below
-# Challenges :
-# 1) Make the building well lit with torches
-# 2) Add a balcony to each floor.
-# 3) A common ladder access for all floors.
-# 4) Add randomness to your design
-#     Hint: for all blocks in building
-#               if block is cobblestone and rand() < 0.1
-#                   set block to Mossy Cobblestone

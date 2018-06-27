@@ -10,6 +10,7 @@ makedocs(
    pages = Any[
        "Home" => "index.md",
        "Quick Start" => "quick.md",
+       "Tutorial" => Any["tutorial/skyscraper.md"]
        "Block Reference" => "blocks.md",
        "API Reference" => "api.md"
    ],

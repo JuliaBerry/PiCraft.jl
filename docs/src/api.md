@@ -9,26 +9,21 @@ Order   = [:type, :function]
 ```
 
 ```@docs
-getBlock(Tuple{Int,Int,Int})
+getBlock(pos::Tuple{Real, Real, Real})
 ```
 
 
 ```@docs
-setBlock(Tuple{Int,Int,Int}, block::Picraft.Block)
+setBlock(pos::Tuple{Real, Real, Real}, block::Block)
 ```
 
 ```@docs
-setBlocks(pos::Tuple{UnitRange{Int}, UnitRange{Int}, UnitRange{Int}}, block::PiCraft.Block)
+setBlocks(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)
 ```
 
 ```@docs
-getHeight(x::Int,z::Int)
+getHeight(x::Int, z::Int)
 ```
-
-```@docs
-getPlayerIds()
-```
-
 
 ```@docs
 getPlayerIds()
@@ -41,12 +36,12 @@ setting(name, status)
 
 
 ```@docs
-save()
+saveWorld()
 ```
 
 
 ```@docs
-restore()
+restoreWorld()
 ```
 
 
@@ -64,7 +59,7 @@ setTile(pos::Tuple{Real, Real, Real})
 ```
 
 ```@docs
-player.getPos()
+getPos()
 ```
 
 ```@docs
