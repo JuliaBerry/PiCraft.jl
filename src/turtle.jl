@@ -18,23 +18,20 @@ mutable struct turtle
     direction::Array{Float64, 1} # Direction turtle is facing, Roll axis
     normal::Array{Float64, 1} # Direction normal to the turtle's body, Yaw axis
     penBlock::PiCraft.Block
-    stepSize::Float64
+    penScale::Float64
     penDown::Bool
 
-    turtle(;pos = getPos(), direction = [1.0; 0.0; 0.0], normal = [0.0; -1.0; 0.0], penBlock = Block(41), stepSize = 0.5, penDown = true) = new(pos, direction, normal, penBlock, stepSize, penDown)
+    turtle(;pos = getPos(), direction = [1.0; 0.0; 0.0], normal = [0.0; -1.0; 0.0], penBlock = Block(41), penScale = 1.0, penDown = true) = new(pos, direction, normal, penBlock, penScale, penDown)
 end
 
 """
     move(t::turtle, s::Int)
 
-Move the turtle `t` forward `s` steps.
+Move the turtle `t` forward `s` units.
 """
 function move(t::turtle, s::Real)
-    s = floor(Int, s)
-    for i in 1:s
-        t.penDown && setBlock(t.pos, t.penBlock)
-        t.pos = t.pos .+ Tuple(t.direction*t.stepSize)
-    end
+    t.penDown && drawLine(t.pos, Tuple(t.pos .+ s*t.direction), t.penBlock)
+    t.pos = Tuple(t.pos .+ s*t.direction)
 end
 
 """
