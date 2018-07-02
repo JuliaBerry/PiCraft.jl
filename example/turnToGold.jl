@@ -1,10 +1,12 @@
-# Turn blocks to gold by hitting them
+# # Turn to Gold
+
+# ### Turn blocks to gold by hitting them
 # Demonstration of pollBlockHits()
 # the function pollBlockHits() returns an Array of hit Events
-# A hit event is a tuple, say ((5, 4, 5), 2, 17)
-# (5, 4, 5) are the coordinates to the block which was hit
-# 2 is the face of the block which was hit
-# 17 is the entityId of the Entity which was responsible for the hit
+# A hit event is a tuple, say `((5, 4, 5), 2, 17)`
+# `(5, 4, 5)` are the coordinates to the block which was hit
+# `2` is the face of the block which was hit
+# `17` is the entityId of the Entity which was responsible for the hit
 
 using PiCraft
 
@@ -19,4 +21,5 @@ while (now() - t).value/1000 < 60.0 # Continue the loop if 60 seconds has not el
     end
 end
 
+# Post a message to screen when done
 post("Time Over!")

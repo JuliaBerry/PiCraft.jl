@@ -1,6 +1,13 @@
 using Documenter, PiCraft
+using Literate
 
 load_dir(x) = map(file -> joinpath("lib", x, file), readdir(joinpath(Base.source_dir(), "src", "lib", x)))
+
+
+Literate.markdown("../example/safeFeet.jl", "src/example"; documenter=true)
+Literate.markdown("../example/turnToGold.jl", "src/example"; documenter=true)
+Literate.markdown("../example/turtle.jl", "src/example"; documenter=true)
+Literate.markdown("../example/skyscraperBasic.jl", "src/example"; documenter=true)
 
 makedocs(
    modules = [PiCraft],
@@ -10,6 +17,12 @@ makedocs(
    pages = Any[
        "Home" => "index.md",
        "Quick Start" => "quick.md",
+       "Examples" => Any[
+            "Safe Feet" => "example/safeFeet.md",
+            "Turn to Gold" => "example/turnToGold.md",
+            "Turtle" => "example/turtle.md",
+            "Sky Scraper" => "example/skyscraperBasic.md"
+       ],
        "Block Reference" => "blocks.md",
        "API Reference" => "api.md"
    ],

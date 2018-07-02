@@ -1,9 +1,9 @@
+
+# # Safe Feet
+#
 # Walk over water and air by replacing it with Dimaond Blocks
 # Usage:
-#   t = now()
-#   while (now() - t).value/1000 < time_period
-#       safeFeet()
-#    end
+#
 
 using PiCraft
 
@@ -15,6 +15,15 @@ function safeFeet()
    sleep(0.05) #Pause as to not spam the API, results in a smoother experience
 end
 
-# Challenge: Use a queue to remove blocks such that the maximum bridge length is 10.
-#            Your script should automatically remove blocks which had too far behind.
-#            Enter "\py bridge" for a demonstration
+# Run this function in a loop, and press Ctrl-C to stop
+
+#    t = now()
+#    while (now() - t).value/1000 < time_period
+#       safeFeet()
+#    end
+#
+
+# ### Challenge:
+# * Use a queue to remove blocks such that the maximum bridge length is 10.
+# * Your script should automatically remove blocks which had too far behind.
+# * Enter "\py bridge" for a demonstration
