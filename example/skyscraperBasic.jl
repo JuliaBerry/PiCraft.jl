@@ -2,6 +2,7 @@
 
 using PiCraft
 
+
 # With the help of programming we can build entire cities with ease. Writing a program to build structures is a great way to minimize repetitive work while experimenting with different parameters. If you are making a small house odds are that writing a program is inefficient and manually building it will get the job done much faster. However, if you are trying to build a skyscraper which spawns 20 stories high then manually it could take several hours depending on your speed but it will definitely be very boring. Writing code to do the same will take a dozen minutes with the added advantage that making changes will be extremely easy.
 
 # To get there first we will start small. In this tutorial we will learn how to build a simple skyscraper.
@@ -32,12 +33,28 @@ using PiCraft
 #            2) Set the bottom level as the flooring block. (Cobblestone for instance)
 #            3) Add pillars to the corners
 
+# Let's first define a few basic parameters for our building
 p = getPos() .+ (0, -1, 0)
 floors = 5
-#length will go in the +ve x direction and width in the +ve z direction
+# length will be in the +ve x direction and width in the +ve z direction
 length = 10
 width = 15
 height = 6
+
+# We're first going to write code to construct a single floor relative to a point
+# Then we will use a loop to create a skyscraper
+# pseudocode:
+#    x = start_position
+#    for i in 1:floors
+#        buildFloor(x)
+#        increase x's height by floor's height
+#    end
+#    Build a ceiling for the top floor
+#
+# Now to build a floor
+#    1) Make all the walls out of glass panes
+#    2) Set the bottom level as floor
+#    3) Get Pillars on the corners
 
 function buildFloor(p)
     # Set all walls to glass panes
@@ -86,6 +103,12 @@ end
 #     - For each floor
 #         - Add flooring
 #         - Add windows
+#
+# This building isn't particularly nice and has too much glass. Let's have another go.
+# When we use programming to solve a problem there can be multiple solutions to the same
+# problem.
+
+# This time let's make the building first and then add windows later
 
 function makeSkyscraper2()
     # Make a filled cuboid of Blocks filling the entire building space
@@ -98,7 +121,9 @@ function makeSkyscraper2()
     for i in 0:floors
         setBlocks(p .+ (2, height*i, 2), p .+ (length - 1, height*i, width - 1), PiCraft.WOOD_PLANKS)
     end
-    # Add window Panes, careful when changing building dimensions
+
+    # Add window Panes, careful if you change the given building dimensions, the change in coordinates may result
+    # in unintended consequences.
     for i in 0:(floors - 1)
         setBlocks(p .+ (1, height*i + 2, floor.((width + 1)/2 - 2)),
         p .+ (1, height*i + 4, floor.((width + 1)/2 + 2)), PiCraft.GLASS_PANE)
@@ -114,6 +139,11 @@ end
 
 # To get better at building you should practice and try new structures and dimensions. Make your building beautiful by experimenting with a variety of different colored blocks and parameters. You can find a list of challenges below.
 
+# In our second iteration we made the building better, the code is easier to
+# follow through and is less in comparison.
+# Now, experiment around writing your own code architecturing your own designs.
+# Check out the challenges listed below
+# Challenges :
 # 1) Make the building well lit with torches
 # 2) Add a balcony to each floor.
 # 3) A common ladder access for all floors.
