@@ -1,4 +1,4 @@
-# Construct a skyscraper
+# # Construct a skyscraper
 
 using PiCraft
 
@@ -82,9 +82,9 @@ end
 
 # Executing `makeSkyscraper()` once will construct a building in front of you. Try experimenting around with different dimensions.
 #
-# ![makeSkyscraper.gif](../docs/src/assets/img/Skyscraper/makeSkyscraper.gif)
-# ---
-# ![makeSkyscraper.png](../docs/src/assets/img/Skyscraper/makeSkyscraper.png)
+# ![makeSkyscraper.gif](../assets/img/Skyscraper/makeSkyscraper.gif)
+# 
+# ![makeSkyscraper.png](../assets/img/Skyscraper/makeSkyscraper.png)
 
 # ***
 
@@ -132,7 +132,7 @@ function makeSkyscraper2()
     end
 end
 
-# ![makeSkyscraper2.png](../docs/src/assets/img/Skyscraper/makeSkyscraper2.png)
+# ![makeSkyscraper2.png](../assets/img/Skyscraper/makeSkyscraper2.png)
 
 # ---
 
@@ -141,7 +141,7 @@ end
 
 # In our second iteration we made the building better, the code is easier to
 # follow through and is less in comparison.
-# Now, experiment around writing your own code architecturing your own designs.
+# Now, experiment with writing your own code architecturing your own designs.
 # Check out the challenges listed below
 # Challenges :
 # 1) Make the building well lit with torches

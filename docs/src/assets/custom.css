@@ -90,9 +90,7 @@ nav.toc {
 .admonition-title {
     font-family: 'Cormorant Garamond', serif;
 }
-#docs header hr {
-    display: none;
-}
+
 
 #docs header {
     display: none;
@@ -171,10 +169,6 @@ article section.docstring {
     margin-bottom: 24px;
     padding-bottom: 24px;
     border-bottom: 1px solid #777;
-}
-
-article section.docstring a.source-link {
-    display: none;
 }
 
 footer {
