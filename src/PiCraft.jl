@@ -3,12 +3,15 @@ module PiCraft
 include("blocks.jl")
 include("turtle.jl")
 include("drawing.jl")
+include("NBT.jl")
 
 export World, Block, connectToWorld, mc_send, getBlock, setBlock, setBlocks, getHeight, getPlayerIds
 export setting, saveWorld, restoreWorld, post, getTile, setTile, getPos, setPos, pollBlockHits
 export clearEvents, camera
 export turtle, move, yaw, pitch, roll
 export drawLine
+export Tag, TAG_Byte, TAG_Short, TAG_Int, TAG_Long, TAG_Float, TAG_Double, TAG_Compound, TAG_String, TAG_Byte_Array
+export readTAG, printTAG
 
 type World
     s::TCPSocket
