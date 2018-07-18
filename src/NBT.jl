@@ -19,68 +19,80 @@
 # We don't differentiate between Named and Nameless files. Nameless Tags are
 # Named Tags with an empty string as their name.
 
-abstract type Tag end
+abstract type NBTag end
 
-struct TAG_End <: Tag
+struct TAG_End <: NBTag
 end
 
-struct TAG_Byte <: Tag
+struct TAG_Byte <: NBTag
+    named::Bool
     name::String
     payload::Int8
 end
 
-struct TAG_Short <: Tag
+struct TAG_Short <: NBTag
+    named::Bool
     name::String
     payload::Int16
 end
 
-struct TAG_Int <: Tag
+struct TAG_Int <: NBTag
+    named::Bool
     name::String
     payload::Int32
 end
 
-struct TAG_Long <: Tag
+struct TAG_Long <: NBTag
+    named::Bool
     name::String
     payload::Int64
 end
 
-struct TAG_Float <: Tag
+struct TAG_Float <: NBTag
+    named::Bool
     name::String
     payload::Float32
 end
 
-struct TAG_Double <: Tag
+struct TAG_Double <: NBTag
+    named::Bool
     name::String
     payload::Float64
 end
 
-struct TAG_Byte_Array <: Tag
+struct TAG_Byte_Array <: NBTag
+    named::Bool
     name::String
     payload::Array{UInt8, 1}
 end
 
-struct TAG_String <: Tag
+struct TAG_String <: NBTag
+    named::Bool
     name::String
     payload::String
 end
 
-struct TAG_List <: Tag
+struct TAG_List <: NBTag
+    named::Bool
     name::String
     tagId::UInt8
-    payload::Array{Tag, 1}
+    payload::Array{NBTag, 1}
 end
 
-struct TAG_Compound <: Tag
+struct TAG_Compound <: NBTag
+    named::Bool
     name::String
-    payload::Array{Tag, 1}
+    payload::Array{NBTag, 1}
 end
 
-struct TAG_Int_Array <: Tag
+struct TAG_Int_Array <: NBTag
+    named::Bool
     name::String
     payload::Array{Int32, 1}
 end
 
-struct TAG_Long_Array <: Tag
+struct TAG_Long_Array <: NBTag
+    named::Bool
     name::String
     payload::Array{Int64, 1}
 end
@@ -89,13 +101,18 @@ tagDict = Dict(0 => TAG_End, 1 => TAG_Byte, 2 => TAG_Short, 3 => TAG_Int, 4 => T
                5 => TAG_Float, 6 => TAG_Double, 7 => TAG_Byte_Array, 8 => TAG_String,
                9 => TAG_List, 10 => TAG_Compound, 11 => TAG_Int_Array, 12 => TAG_Long_Array)
 
-tagKeyDict = Dict(TAG_End => 0, TAG_Byte => 1, TAG_Short = 2, TAG_Int = 3, TAG_Long = 4,
-                  TAG_Float => 5, TAG_Double => 6, TAG_Byte_Array => 7, TAG_String = 8
+tagKeyDict = Dict(TAG_End => 0, TAG_Byte => 1, TAG_Short => 2, TAG_Int => 3, TAG_Long => 4,
+                  TAG_Float => 5, TAG_Double => 6, TAG_Byte_Array => 7, TAG_String => 8,
                   TAG_List => 9, TAG_Compound => 10, TAG_Int_Array => 11, TAG_Long_Array => 12)
+"""
+    readTag(stream::IO, tagId = -1)
 
+Read a single Binary Tag from `stream`. `tagId` is the type of nameless Tag
+`tagId` is `-1` for Named Binary Tag.
+"""
 function readTAG(stream::IO, tagId = -1)
     named = tagId == -1 ? true:false
-    if tagId == -1
+    if named
         tagId = read(stream, UInt8)
     end
     if !(tagId in 0:12)
@@ -131,29 +148,27 @@ function readTAG(stream::IO, tagId = -1)
     elseif tagId == 9
         tagId2 = read(stream, UInt8)
         if !(tagId2 in 0:12)
-            error("Unknown tagId")
+            error("Unknown tagId.")
         end
-
         tags = bswap(read(stream, UInt32))
-        payload = Array{Tag, 1}()
+        payload = Array{NBTag, 1}()
         for i in 1:tags
             x = readTAG(stream, tagId2)
-            println(x)
             push!(payload, x)
         end
-        return TAG_List(name, tagId2, payload)
+        return TAG_List(named, name, tagId2, payload)
     elseif tagId == 10
-        payload = Array{Tag, 1}()
+        payload = Array{NBTag, 1}()
         tag = readTAG(stream, -1)
         while typeof(tag) != TAG_End
             push!(payload, tag)
             tag = readTAG(stream, -1)
         end
     end
-    return tagDict[tagId](name, payload)
+    return tagDict[tagId](named, name, payload)
 end
 
-function printTAG(tag::Tag, stream::IO = STDOUT, tabDepth = 0)
+function printTAG(tag::NBTag, stream::IO = STDOUT, tabDepth = 0)
     if typeof(tag) in  [TAG_Byte, TAG_Short, TAG_Int, TAG_Long, TAG_Float, TAG_Double, TAG_String]
         println(stream, "\t"^tabDepth, typeof(tag), " : ", "\""*tag.name*"\"", " = ", tag.payload)
     elseif typeof(tag) == TAG_List
@@ -178,7 +193,13 @@ while !(eof(istream))
 end
 end
 
-function importSchematic(istream::IO, p::Tuple{Real, Real, Real} = getPos())
+"""
+    importSchematic(istream::IO)
+
+Reads a `.schematic` file and return a 3 - D matrix of type `Array{Block, 3}`
+which represents the schematic.
+"""
+function importSchematic(istream::IO)
     schematic = readTAG(istream)
     if schematic.name != "Schematic"
         error("$istream is not a Schematic file.")
@@ -202,14 +223,25 @@ function importSchematic(istream::IO, p::Tuple{Real, Real, Real} = getPos())
         end
     end
 
+    # Check for corruption
+    if Height  < 1 || Width < 1 || Length < 1
+        error("Illegal model dimensions. Cannot be imported.")
+    elseif length(BlockIds) != length(BlockData)
+        error("Illegal model. Cannot be imported.")
+    end
+
     # Coordinates in schematics range from (0,0,0) to (Width-1, Height-1, Length-1).
     # Blocks are sorted by Height then Length and then Width
-    for Y in 0:(Height - 1)
-        for X in 0:(Width - 1)
-            for Z in 0:(Length - 1)
-                i = (Y*Length + Z)*Width + X + 1
-                setBlock(p .+ (X, Y, Z), Block(BlockIds[i], BlockData[i]))
+    model = Array{Block, 3}(Int64.((Width, Height, Length)))
+
+    for Y in 1:Height
+        for X in 1:Width
+            for Z in 1:Length
+                i = ((Y - 1)*Length + (Z - 1))*Width + X
+                model[X, Y, Z] = Block(BlockIds[i], BlockData[i])
             end
         end
     end
+
+    return model
 end
