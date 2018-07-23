@@ -14,7 +14,7 @@ export drawLine
 export parseNBT, importSchematic
 export buildModel
 
-type World
+mutable struct World
     s::TCPSocket
     function World()
         try

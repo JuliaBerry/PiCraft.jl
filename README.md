@@ -2,6 +2,15 @@
 
 ### Control a Minecraft world on the Minecraft: Pi or Java edition from Julia
 
+PiCraft is a Julia package which allows control over the Minecraft World using code. It is compatible with the Minecraft: Pi Edition and the Java Edition with the help of RaspberryJamMod or RaspberryJuice.
+
+With this package you will be able to :
+
+- Write scripts to teleport and walk over Water and Lava.
+- Construct multi-storey skyscrapers within seconds.
+- Draw fractals and shapes using a 3-D turtle.
+- Import and export `.schematic` models without external software.  
+
 ## Installation and Usage
 
 ### Get Minecraft
@@ -20,7 +29,7 @@ Officially the ability to communicate with the Minecraft world is only available
 
 Download the appropriate Julia version for your system from [here](https://julialang.org/downloads/).
 
-### Install the PiCraft packge
+### Install the PiCraft package
 
 ```julia
 Pkg.clone("https://github.com/JuliaBerry/PiCraft.jl")
@@ -37,13 +46,11 @@ Load the `PiCraft` package on the Julia console:
 using PiCraft
 ```
 
-On load, the library will attempt to connect to a running Minecraft world on localhost. If Minecraft is not running, an error message will be printed. Subsequently, once Minecraft has been started,  a connection can be forced by calling `connectToWorld()`
+On load, the library will attempt to connect to a running Minecraft world on `localhost`. If Minecraft is not running, an error message will be printed. Subsequently, once Minecraft has been started,  a connection can be forced by calling `connectToWorld()`.
 
-You can save and restore your progress using the commands:
-1) Save: `save()`
-2) Load last savepoint: `restore()`
+A 3-D coordinate system is used to describe the Minecraft world. Every position in the Minecraft World can be described with the help of 3 numbers. The X, Y and Z coordinates. These coordinates can be viewed by opening the Debug screen using `F3`.
 
-A 3-D coordinate system is used to describe the Minecraft world. Throughout this package we describe a set of coordinates using a `Tuple` of numbers, for example `(3.5, 19, 7)` describes a position in the Minecraft World. The 2<sup>nd</sup> attribute of the `Tuple` describes the y-axis or height. When in game it is convenient to find the player's coordinates by opening the debug menu.  
+![](./docs/src/assets/img/coordinates.png)
 
 ### Player
 You can find and set your player's location:
@@ -52,22 +59,24 @@ You can find and set your player's location:
 2) Set Player position: `setPos(pos::Tuple{Float64, Float64, Float64})`
       * Teleports the player to the specified coordinates.
 
+For example : `setPos(getPos .+ (0, 10, 0))` will teleport you 10m above you current position.
+
 ### Blocks
 Blocks are the heart of Minecraft. The package provides the ability to modify blocks at specified coordinates.
 `Block` is an immutable datatype defined in `src/blocks.jl`.
 
 ```julia
-immutable Block
+struct Block
     id::Int
     data::Int
 end
 ```
-The `id` defines the type of block (like cobblestone, wool, wood,.etc) and the `data` attribute defines additional characteristics of the block, on default every block has it `data` set to `0`. For example, Wool's block id is 35, `Block(35,0)` refers to a block of white wool. Different wool colors can be accessed by changing the `data` attribute. Red Wool is `Block(35, 14)`, Pink Wool is `Block(35,6)` and so on. A complete reference can be found in the documentation.
+The `id` defines the type of block (like cobblestone, wool, wood,.etc) and the `data` attribute defines additional characteristics of the block, on default every block has it `data` set to `0`. For example, Wool's block id is 35, `Block(35,0)` refers to a block of white wool. Different wool colors can be accessed by changing the `data` attribute. Red Wool is `Block(35, 14)`, Pink Wool is `Block(35,6)` and so on. A complete reference can be found [here](https://juliaberry.github.io/PiCraft.jl/blocks.html) in the documentation.
 
-1) Place Block: `setBlock(Tuple{Int,Int,Int}, block::Picraft.Block)`
+1) Place Block: `setBlock(Tuple{Int, Int, Int}, block::Block)`
     * Place the specified Block at the specified coordinates.
-2) Place Blocks: `setBlocks(pos::Tuple{UnitRange{Int}, UnitRange{Int}, UnitRange{Int}}, block::PiCraft.Block)`
-    * Place the specified block in the entire region described by the unit range.
+2) Place Blocks: `setBlocks(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)`
+    * Set an entire region to the specified block type defined by corners.
 3) Get Block information: `getBlock(Tuple{Int,Int,Int})`
     * Returns the block present at the specified coordinates.
 
@@ -84,7 +93,7 @@ getHeight(x::Int, z::Int) #Get the height of the world at the specified `x` and 
 getPlayerIds() # Return an array of all Player Id's connected to the server.
 setting(name, status) #Change a setting
 save() #save the current world state
-restore() #restore the world to the previouly saved world state
+restore() #restore the world to the previously saved world state
 post(s::string) #send string s to chat
 getTile() # return a tuple of integers (x, y, z),  for the tile on which the player is placed
 setTile(pos::Tuple{Real, Real, Real}) # move the player to the tile specified by the integer coordinates
