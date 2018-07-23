@@ -1,5 +1,4 @@
-
-immutable Block
+struct Block
     id::Int
     data::Int
 end
@@ -799,4 +798,4 @@ mc_items["Wait Disc"]=Block(2267,0)
 
 
 find_item(name::String) = mc_items[name]
-find_item(id::Int, data::Int=0) = Block(id, data) 
+find_item(id::Int, data::Int=0) = Block(id, data)

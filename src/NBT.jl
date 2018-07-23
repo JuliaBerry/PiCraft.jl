@@ -75,8 +75,7 @@ end
 struct TAG_List <: NBTag
     named::Bool
     name::String
-    tagId::UInt8
-    payload::Array{NBTag, 1}
+    payload::Array{T, 1} where T <: NBTag
 end
 
 struct TAG_Compound <: NBTag
@@ -130,34 +129,31 @@ function readTAG(stream::IO, tagId = -1)
             name *= string(Char(read(stream, UInt8)))
         end
     end
-
-    if tagId in 1:6
+    if tagId in 1:6    # Signed Values (Byte, Short, Float...)
         payload = bswap(read(stream, fieldtype(tagDict[tagId], :payload)))
-    elseif tagId in [7, 11, 12]
+    elseif tagId in [7, 11, 12] # Arrays (Byte, Int, Long)
         length = bswap(read(stream, Int32))
         payload = fieldtype(tagDict[tagId], :payload)()
         for i in 1:length
             push!(payload, bswap(read(stream, eltype(fieldtype(tagDict[tagId], :payload)))))
         end
-    elseif tagId == 8
+    elseif tagId == 8 # String
         length = bswap(read(stream, UInt16))
         payload = ""
         for i in 1:length
             payload *= string(Char(read(stream, UInt8)))
         end
-    elseif tagId == 9
-        tagId2 = read(stream, UInt8)
-        if !(tagId2 in 0:12)
+    elseif tagId == 9 # List
+        listTagId = read(stream, UInt8)
+        if !(listTagId in 0:12)
             error("Unknown tagId.")
         end
         tags = bswap(read(stream, UInt32))
-        payload = Array{NBTag, 1}()
+        payload = Array{tagDict[listTagId], 1}(tags)
         for i in 1:tags
-            x = readTAG(stream, tagId2)
-            push!(payload, x)
+            payload[i] = readTAG(stream, listTagId)
         end
-        return TAG_List(named, name, tagId2, payload)
-    elseif tagId == 10
+    elseif tagId == 10 # TAG_Compound
         payload = Array{NBTag, 1}()
         tag = readTAG(stream, -1)
         while typeof(tag) != TAG_End
@@ -168,11 +164,48 @@ function readTAG(stream::IO, tagId = -1)
     return tagDict[tagId](named, name, payload)
 end
 
+function writeTAG(stream::IO, tag::NBTag)
+    tagId = tagKeyDict[typeof(tag)]
+    if tagId == 0 # TAG_End
+        write(stream, UInt8(0))
+        return
+    end
+    if tag.named
+       write(stream, UInt8(tagId))
+       write(stream, bswap(UInt16(length(tag.name))))
+       for i in 1:length(tag.name)
+           write(stream, UInt8(tag.name[i]))
+       end
+    end
+    if tagId in 1:6
+        write(stream, bswap(tag.payload))
+    elseif tagId in [7, 11, 12]
+        write(stream, bswap(Int32(length(tag.payload))))
+        for i in 1:length(tag.payload)
+            write(stream, bswap(tag.payload[i]))
+        end
+    elseif tagId == 8
+        write(stream, bswap(UInt16(length(tag.payload))))
+        write(stream, UInt8.([tag.payload...]))
+    elseif tagId == 9 # List
+        write(stream, UInt8(tagKeyDict[eltype(tag.payload)]))
+        write(stream, bswap(Int32(length(tag.payload))))
+        for i in 1:length(tag.payload)
+            writeTAG(stream, tag.payload[i])
+        end
+    elseif tagId == 10
+        for i in 1:length(tag.payload)
+            writeTAG(stream, tag.payload[i])
+        end
+        writeTAG(stream, TAG_End())
+    end
+end
+
 function printTAG(tag::NBTag, stream::IO = STDOUT, tabDepth = 0)
     if typeof(tag) in  [TAG_Byte, TAG_Short, TAG_Int, TAG_Long, TAG_Float, TAG_Double, TAG_String]
         println(stream, "\t"^tabDepth, typeof(tag), " : ", "\""*tag.name*"\"", " = ", tag.payload)
     elseif typeof(tag) == TAG_List
-        println(stream, "\t"^tabDepth, "TAG_List : ", tagDict[tag.tagId], " : ", "\""*tag.name*"\"", "(", length(tag.payload), " entries)")
+        println(stream, "\t"^tabDepth, "TAG_List : ", eltype(tag.payload), " : ", "\""*tag.name*"\"", "(", length(tag.payload), " entries)")
         for t in tag.payload
             printTAG(t, stream, tabDepth + 1)
         end
