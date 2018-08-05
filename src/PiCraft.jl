@@ -12,7 +12,7 @@ export clearEvents, camera
 export turtle, move, yaw, pitch, roll
 export drawLine
 export parseNBT, importSchematic
-export buildModel
+export buildModel, copyModel, cutModel, flip, rotate
 
 mutable struct World
     s::TCPSocket
@@ -88,7 +88,7 @@ end
 """
     setBlocks(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)
 
-Set an entire region to the specified block type defined by the corners.
+Set an entire region to the specified block type defined by the corners `p1` and `p2`.
 """
 function setBlocks(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)
     p1 = round.(Int, p1)
@@ -124,11 +124,17 @@ saveWorld() = PiCraft.mc_send("world.checkpoint.save()", false)
 restoreWorld() = PiCraft.mc_send("world.checkpoint.restore()", false)
 
 """
-    post(s::String)
+    post(m...)
 
 Post a message to chat
 """
-post(s::String) = PiCraft.mc_send("chat.post($(s)", false)
+function post(m...)
+    s = ""
+    for x in m
+        s *= string(x)
+    end
+    PiCraft.mc_send("chat.post($(s)", false)
+end
 
 """
     getTile()

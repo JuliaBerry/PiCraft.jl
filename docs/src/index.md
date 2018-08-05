@@ -5,9 +5,16 @@
 
 *Control a Minecraft world from Julia*
 
-Minecraft is one of the most popular video games in existence, with a player base of over 75 million users. While normally a game that is played with regular user controls, the Pi edition introduced a programatic API, that allows external programs to to control the Minecraft world. This api has been ported to the existing Java version of the game as well, using server plugins. Being able to control a physical 3D world from code creates many amazing opportunities for fun and education.
+![PiCraft.png](./assets/img/PiCraft.png)
 
-This project provides a library that allows Julia programs to control a Minecraft world.
+PiCraft is a Julia package which utilizes the Minecraft: Pi edition programming API to control the Minecraft World. The package can be used with Minecraft: Java Edition with the help of [`RaspberryJamMod`](https://github.com/arpruss/raspberryjammod) & [`RaspberryJuice`](https://dev.bukkit.org/projects/raspberryjuice) plugin.
+
+With this package you will be able to :
+
+- Write scripts to teleport and walk over Water and Lava.
+- Construct multi-storey skyscrapers within seconds.
+- Draw fractals and shapes using a 3-D turtle.
+- Import and export `.schematic` models without external software.  
 
 ## Installation
 
