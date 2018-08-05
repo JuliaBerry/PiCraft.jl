@@ -179,3 +179,4 @@ function rotate(A, ::Type{Val{:r}}, ::Type{Val{:x}})
     end
     return B
 end
+
