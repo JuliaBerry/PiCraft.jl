@@ -116,7 +116,7 @@ function nextState(A::Array{Bool, 3})
     return B
 end
 
-function displayState(p::Tuple{Int, Int, Int}, A::Array{Bool, 2})
+function displayState(p::Tuple{Int, Int, Int}, A::Array{Bool, 3})
     dims = size(A)
     for i = 1:dims[1], j = 1:dims[2], k = 1:dims[3]
         if A[i, j, k]
