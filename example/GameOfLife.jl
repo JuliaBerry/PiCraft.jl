@@ -110,7 +110,7 @@ function nextState(A::Array{Bool, 3})
         if A[i, j, k] == false && liveNeighbours == 5
             B[i, j, k] = true
         elseif liveNeighbours < 4 || liveNeighbours > 5
-            B[i, j, l] = false
+            B[i, j, k] = false
         end
     end
     return B
