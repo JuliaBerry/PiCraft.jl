@@ -110,7 +110,7 @@ Read a single Binary Tag from `stream`. `tagId` is the type of nameless Tag
 `tagId` is `-1` for Named Binary Tag.
 """
 function readTAG(stream::IO, tagId = -1)
-    named = tagId == -1 ? true:false
+    named = tagId == -1 ? true : false
     if named
         tagId = read(stream, UInt8)
     end

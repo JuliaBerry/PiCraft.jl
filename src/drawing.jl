@@ -25,7 +25,7 @@ function drawLine(p1::Tuple{Real,Real,Real}, p2::Tuple{Real,Real,Real}, block::P
     Δx, Δy, Δz = p2 .- p1
     δx, δy, δz = ifelse.((Δx, Δy, Δz) .< 0, -1, 1)
     l, m, n = abs.((Δx, Δy, Δz))
-    Δx2, Δy2, Δz2 = abs.(2.*(Δx, Δy, Δz))
+    Δx2, Δy2, Δz2 = abs.(2 .* (Δx, Δy, Δz))
     if (l >= m && l >= n)
         ϵ1, ϵ2 = (Δy2, Δz2) .- (l, l)
         for i in 1:l

@@ -1,5 +1,7 @@
 module PiCraft
 
+import Sockets
+
 include("blocks.jl")
 include("turtle.jl")
 include("drawing.jl")
@@ -15,10 +17,10 @@ export parseNBT, importSchematic
 export buildModel, copyModel, cutModel, flip, rotate
 
 mutable struct World
-    s::TCPSocket
+    s::Sockets.TCPSocket
     function World()
         try
-            s=connect("localhost", 4711)
+            s = Sockets.connect("localhost", 4711)
             new(s)
         catch
             warn("Unable to connect to Minecraft World. Use `connectToWorld()` after starting Minecraft")
