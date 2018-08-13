@@ -1,6 +1,6 @@
 module PiCraft
 
-import Sockets
+using Sockets
 
 include("blocks.jl")
 include("turtle.jl")
@@ -23,13 +23,17 @@ mutable struct World
             s = Sockets.connect("localhost", 4711)
             new(s)
         catch
-            warn("Unable to connect to Minecraft World. Use `connectToWorld()` after starting Minecraft")
+            @warn("Unable to connect to Minecraft World. Use `connectToWorld()` after starting Minecraft")
             new(TCPSocket())
         end
     end
 end
 
-global const minecraftWorld = World()
+global const minecraftWorld = Ref{World}()
+
+function __init__()
+    minecraftWorld[] = World()
+end
 
 """
     connectToWorld(address = "localhost", port = 4711)
@@ -39,7 +43,7 @@ Connect to the Minecraft API.
 function connectToWorld(address = "localhost", port = 4711)
     try
         sock=connect(address, port)
-        minecraftWorld.s = sock
+        minecraftWorld[].s = sock
         info("Successfully connected to the Minecraft World.")
     catch
         error("Unable to connect to the Minecraft World.")
@@ -52,13 +56,13 @@ end
 Communicate with the Minecraft API.
 """
 function mc_send(cmd, output=true)
-    if minecraftWorld.s.status == Base.StatusInit || minecraftWorld.s.status == Base.StatusUninit
+    if minecraftWorld[].s.status == Base.StatusInit || minecraftWorld[].s.status == Base.StatusUninit
         error("Connection to Minecraft World is not initialised. Use `PiCraft.connectToWorld()` first.")
     end
-    write(minecraftWorld.s, cmd*"\n")
+    write(minecraftWorld[].s, cmd*"\n")
     if output
-        s = readline(minecraftWorld.s)
-        if contains(s,  "Fail")
+        s = readline(minecraftWorld[].s)
+        if occursin("Fail", s)
             println("Return: $s")
             error("Error from Minecraft in command $cmd")
         end

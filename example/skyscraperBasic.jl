@@ -37,7 +37,7 @@ using PiCraft
 p = getPos() .+ (0, -1, 0)
 floors = 5
 # length will be in the +ve x direction and width in the +ve z direction
-length = 10
+len = 10
 width = 15
 height = 6
 
@@ -59,25 +59,25 @@ height = 6
 function buildFloor(p)
     # Set all walls to glass panes
     setBlocks(p .+ (1, 0, 1), p .+ (1, height, width), PiCraft.GLASS_PANE)
-    setBlocks(p .+ (1, 0, 1), p .+ (length, height, 1), PiCraft.GLASS_PANE)
-    setBlocks(p .+ (1, height, width), p .+(length, 0, width), PiCraft.GLASS_PANE)
-    setBlocks(p .+ (length, height, width), p .+ (length, 0, 1), PiCraft.GLASS_PANE)
+    setBlocks(p .+ (1, 0, 1), p .+ (len, height, 1), PiCraft.GLASS_PANE)
+    setBlocks(p .+ (1, height, width), p .+(len, 0, width), PiCraft.GLASS_PANE)
+    setBlocks(p .+ (len, height, width), p .+ (len, 0, 1), PiCraft.GLASS_PANE)
 
     #Set entire floor to Stone Brick
-    setBlocks(p .+ (1, 0, 1), p .+ (length, 0, width), PiCraft.STONE_BRICK)
+    setBlocks(p .+ (1, 0, 1), p .+ (len, 0, width), PiCraft.STONE_BRICK)
 
     #Set 4 Pillars to the corners
     setBlocks(p .+ (1, 0, 1), p .+ (1, height, 1), PiCraft.STONE_BRICK)
     setBlocks(p .+ (1, 0, width), p .+ (1, height, width), PiCraft.STONE_BRICK)
-    setBlocks(p .+ (length, 0, 1), p .+ (length, height, 1), PiCraft.STONE_BRICK)
-    setBlocks(p .+ (length, 0 , width), p .+ (length, height, width), PiCraft.STONE_BRICK)
+    setBlocks(p .+ (len, 0, 1), p .+ (len, height, 1), PiCraft.STONE_BRICK)
+    setBlocks(p .+ (len, 0 , width), p .+ (len, height, width), PiCraft.STONE_BRICK)
 end
 
 function makeSkyscraper()
     for i in 1:floors
         buildFloor(p .+ (0, height*i - height, 0))
     end
-    setBlocks(p .+ (1, height*floors, 1), p .+ (length, height*floors, width), PiCraft.IRON_BLOCK) # Set Roof to Iron Block
+    setBlocks(p .+ (1, height*floors, 1), p .+ (len, height*floors, width), PiCraft.IRON_BLOCK) # Set Roof to Iron Block
 end
 
 # Executing `makeSkyscraper()` once will construct a building in front of you. Try experimenting around with different dimensions.
@@ -112,14 +112,14 @@ end
 
 function makeSkyscraper2()
     # Make a filled cuboid of Blocks filling the entire building space
-    setBlocks(p .+ (1, 0, 1), p .+ (length, height*floors + 1, width),Block(251, 0))
+    setBlocks(p .+ (1, 0, 1), p .+ (len, height*floors + 1, width),Block(251, 0))
 
     # Hollow out the inside of the building
-    setBlocks(p .+ (2, 1, 2), p .+ (length - 1, height*floors, width - 1), PiCraft.AIR)
+    setBlocks(p .+ (2, 1, 2), p .+ (len - 1, height*floors, width - 1), PiCraft.AIR)
 
     # Add wooden flooring
     for i in 0:floors
-        setBlocks(p .+ (2, height*i, 2), p .+ (length - 1, height*i, width - 1), PiCraft.WOOD_PLANKS)
+        setBlocks(p .+ (2, height*i, 2), p .+ (len - 1, height*i, width - 1), PiCraft.WOOD_PLANKS)
     end
 
     # Add window Panes, careful if you change the given building dimensions, the change in coordinates may result
