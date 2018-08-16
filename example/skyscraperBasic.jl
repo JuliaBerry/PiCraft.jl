@@ -12,7 +12,7 @@ using PiCraft
 # ## makeSkyscraper()
 
 # * Decide the location for the building
-#     `p = getPos() .+ (0, -1, 0)`
+#     `p = getTile()`
 # * Decide the dimensions and parameters for the building
 #     - floors = 5
 #     - length = 10
@@ -34,7 +34,7 @@ using PiCraft
 #            3) Add pillars to the corners
 
 # Let's first define a few basic parameters for our building
-p = getPos() .+ (0, -1, 0)
+p = getTile()
 floors = 5
 # length will be in the +ve x direction and width in the +ve z direction
 len = 10
@@ -57,7 +57,7 @@ height = 6
 #    3) Get Pillars on the corners
 
 function buildFloor(p)
-    # Set all walls to glass panes
+    #Set all walls to glass panes
     setBlocks(p .+ (1, 0, 1), p .+ (1, height, width), PiCraft.GLASS_PANE)
     setBlocks(p .+ (1, 0, 1), p .+ (len, height, 1), PiCraft.GLASS_PANE)
     setBlocks(p .+ (1, height, width), p .+(len, 0, width), PiCraft.GLASS_PANE)
@@ -83,7 +83,7 @@ end
 # Executing `makeSkyscraper()` once will construct a building in front of you. Try experimenting around with different dimensions.
 #
 # ![makeSkyscraper.gif](../assets/img/Skyscraper/makeSkyscraper.gif)
-# 
+#
 # ![makeSkyscraper.png](../assets/img/Skyscraper/makeSkyscraper.png)
 
 # ***
@@ -92,7 +92,7 @@ end
 # This building serves as a demonstration of how we can break down a construction task. When programming we will generally have a choice of algorithms/strategies to choose among. In our next example we will choose a different algorithm.
 #
 # * Decide the location, parameters and dimensions like last time.
-#     -  `p = getPos() .+ (0, -1, 0)`
+#     -  `p = getTile()`
 #     - floors = 5
 #     - length = 10
 #     - width = 15

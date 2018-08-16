@@ -17,11 +17,12 @@ end
 
 # Run this function in a loop, and press Ctrl-C to stop
 
+# ```julia
 #    t = now()
 #    while (now() - t).value/1000 < time_period
 #       safeFeet()
 #    end
-#
+# ```
 
 # ### Challenge:
 # * Use a queue to remove blocks such that the maximum bridge length is 10.
