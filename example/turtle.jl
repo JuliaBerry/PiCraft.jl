@@ -1,4 +1,4 @@
-# #Turtle Programming
+# # Turtle Programming
 
 # ## Introduction
 # In this tutorial we will have a look at _Turtle Programming_. In 1967 a general purpose programming language called LOGO was created. The main highlight of this language was turtle graphics. In turtle graphics we have a robot with a pen which draws on a canvas. We can control this turtle using a few commands. The main commands are :
@@ -23,7 +23,7 @@
 
 p = getPos()
 setBlocks(p .+ (-50, 0, -50), p .+ (50, 0, 50), Block(35, 15))
-# [canvasSetup.png](../assets/img/Turtle/canvasSetup.png)
+# ![canvasSetup.png](../assets/img/Turtle/canvasSetup.png)
 #
 # To initialize the turtle:
 t = turtle(pos = p)
@@ -43,7 +43,7 @@ move(t, 10)
 t.penDown = true
 move(t, 10)
 
-# [draw1.png](../assets/img/Turtle/draw1.png)
+# ![draw1.png](../assets/img/Turtle/draw1.png)
 # To reset the canvas and the turtle it can be convenient to define a function
 
 function clrscr(t, p)
@@ -62,7 +62,7 @@ move(t, 10)
 yaw(t, 90)
 move(t, 10)
 
-# [square.png](../assets/img/Turtle/square.png)
+# ![square.png](../assets/img/Turtle/square.png)
 
 # We can also use a 'for loop' for the same
 clrscr(t, p)
@@ -98,7 +98,7 @@ for i in 1:5
     turn(t, 144)
 end
 
-# [star.png](../assets/img/Turtle/star.png)
+# ![star.png](../assets/img/Turtle/star.png)
 
 # We can also make spirals.
 #
@@ -109,7 +109,7 @@ for i in 1:10
     turn(t, 90)
 end
 
-# [spiral1.png](../assets/img/Turtle/spiral1.png)
+# ![spiral1.png](../assets/img/Turtle/spiral1.png)
 
 clrscr(t, p)
 for i in 1:10
@@ -117,13 +117,13 @@ for i in 1:10
     turn(t, 120)
 end
 
-# [spiral2.png](../assets/img/Turtle/spiral2.png)
+# ![spiral2.png](../assets/img/Turtle/spiral2.png)
 
 # ---
 # ## 3-D turtle
 # As mentioned earlier instedad of a single `turn` command we have 3 commands, namely `yaw`, `pitch` and `roll`.
 #
-# [Roll_Pitch_Yaw.JPG](../assets/img/Turtle/Roll_Pitch_Yaw.JPG)
+# ![Roll_Pitch_Yaw.JPG](../assets/img/Turtle/Roll_Pitch_Yaw.JPG)
 # In essence we have 3 mutually perpendicular axis on the turtle.
 #
 # * Longitudinal(turtle.direction, points forward) : Roll Axis
@@ -131,6 +131,7 @@ end
 # * Vertical(turtle.normal, points downwards) : Yaw Axis
 #
 # To get the positive rotation direction use the [corkscrew rule](https://en.wikipedia.org/wiki/Right-hand_rule).
+# ![corkscrew rule image](https://upload.wikimedia.org/wikipedia/commons/3/34/Right-hand_grip_rule.svg)
 #
 # Curl your right hand's fingers with the thumb pointing outwards like in a thumbs up position. When your thumb points in the axis vector then the curl direction is the positive rotation direction.
 #
@@ -146,7 +147,7 @@ roll(t, 90)
 pitch(t, 90)
 move(t, 10)
 
-# [draw2.png](../assets/img/Turtle/draw2.png)
+# ![draw2.png](../assets/img/Turtle/draw2.png)
 #
 # We can use the same concepts of the 2-D turtle to draw in 3-D.
 #
@@ -159,7 +160,7 @@ for i in 1:4
     yaw(t, 90)
 end
 
-# [squareInclined.png](../assets/img/Turtle/squareInclined.png)
+# ![squareInclined.png](../assets/img/Turtle/squareInclined.png)
 #
 # Spring
 t = turtle(pos = getPos())

@@ -8,6 +8,8 @@ Literate.markdown("../example/safeFeet.jl", "src/example"; documenter=true)
 Literate.markdown("../example/turnToGold.jl", "src/example"; documenter=true)
 Literate.markdown("../example/turtle.jl", "src/example"; documenter=true)
 Literate.markdown("../example/skyscraperBasic.jl", "src/example"; documenter=true)
+Literate.markdown("../example/GameOfLife.jl", "src/example"; documenter=true)
+Literate.markdown("../example/platform9_75.jl", "src/example"; documenter=true)
 
 makedocs(
    modules = [PiCraft],
@@ -22,6 +24,8 @@ makedocs(
             "Turn to Gold" => "example/turnToGold.md",
             "Turtle" => "example/turtle.md",
             "Sky Scraper" => "example/skyscraperBasic.md"
+            "Game Of Life" => "example/GameOfLife.jl",
+            "Platform 9¾" => "example/platform9_75.jl"
        ],
        "Block Reference" => "blocks.md",
        "API Reference" => "api.md"
