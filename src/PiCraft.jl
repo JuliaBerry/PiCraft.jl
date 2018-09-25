@@ -42,12 +42,11 @@ Connect to the Minecraft API.
 """
 function connectToWorld(address = "localhost", port = 4711)
     try
-        sock=connect(address, port)
-        minecraftWorld[].s = sock
-        info("Successfully connected to the Minecraft World.")
+        minecraftWorld[].s = connect(address, port)
     catch
         error("Unable to connect to the Minecraft World.")
     end
+    @info("Successfully connected to the Minecraft World.")
 end
 
 """

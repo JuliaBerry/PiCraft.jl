@@ -32,7 +32,8 @@ Download the appropriate Julia version for your system from [here](https://julia
 ### Install the PiCraft package
 
 ```julia
-Pkg.clone("https://github.com/JuliaBerry/PiCraft.jl")
+using Pkg
+Pkg.add("https://github.com/JuliaBerry/PiCraft.jl")
 ```
 
 ### Documentation
@@ -50,7 +51,7 @@ On load, the library will attempt to connect to a running Minecraft world on `lo
 
 A 3-D coordinate system is used to describe the Minecraft world. Every position in the Minecraft World can be described with the help of 3 numbers. The X, Y and Z coordinates. These coordinates can be viewed by opening the Debug screen using `F3`.
 
-![](./docs/src/assets/img/coordinates.png)
+![debug-screen](./docs/src/assets/img/coordinates.png)
 
 ### Player
 You can find and set your player's location:
