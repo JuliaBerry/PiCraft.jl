@@ -24,7 +24,7 @@ function copyModel(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real})
     p1 = round.(Int, p1)
     p2 = round.(Int, p2)
     dims = (abs.(p2 .- p1) .+ (1, 1, 1))
-    m = Array{Block, 3}(dims)
+    m = Array{Block, 3}(undef, dims)
     for X in 1:dims[1]
         for Y in 1:dims[2]
             for Z in 1:dims[3]
@@ -179,4 +179,3 @@ function rotate(A, ::Type{Val{:r}}, ::Type{Val{:x}})
     end
     return B
 end
-

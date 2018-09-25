@@ -149,7 +149,7 @@ function readTAG(stream::IO, tagId = -1)
             error("Unknown tagId.")
         end
         tags = bswap(read(stream, UInt32))
-        payload = Array{tagDict[listTagId], 1}(tags)
+        payload = Array{tagDict[listTagId], 1}(undef, tags)
         for i in 1:tags
             payload[i] = readTAG(stream, listTagId)
         end
@@ -265,7 +265,7 @@ function importSchematic(istream::IO)
 
     # Coordinates in schematics range from (0,0,0) to (Width-1, Height-1, Length-1).
     # Blocks are sorted by Height then Length and then Width
-    model = Array{Block, 3}(Int64.((Width, Height, Length)))
+    model = Array{Block, 3}(undef, Int.((Width, Height, Length)))
 
     for Y in 1:Height
         for X in 1:Width
