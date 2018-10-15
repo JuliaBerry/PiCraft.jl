@@ -219,23 +219,46 @@ function printTAG(tag::NBTag, stream::IO = STDOUT, tabDepth = 0)
     end
 end
 
+"""
+    parseNBT(filename::AbstractString, ostream::IO = stdout)
 
-function parseNBT(istream::IO, ostream::IO = STDOUT)
+Parse a Named Binary tag file.
+"""
+function parseNBT(filename::AbstractString, ostream::IO = stdout)
+istream = open(filename)
+t = read(istream, UInt16)
+close(istream)
+if t == 0x8b1f #Starting bytes of a GZip file, note the endian
+    istream = GZip.open(filename)
+else
+    istream = open(filename)
+end
+
 while !(eof(istream))
     printTAG(readTAG(istream), ostream, 0)
 end
+close(istream)
 end
 
 """
-    importSchematic(istream::IO)
+    importSchematic(filename::AbstractString)
 
-Reads a `.schematic` file and return a 3 - D matrix of type `Array{Block, 3}`
+Reads a `.schematic` file and return a 3 - D matrix of type `Array{Block, 3}`(model)
 which represents the schematic.
+
 """
-function importSchematic(istream::IO)
+function importSchematic(filename::AbstractString)
+    istream = open(filename)
+    t = read(istream, UInt16)
+    close(istream)
+    if t == 0x8b1f
+        istream = GZip.open(filename)
+    else
+        istream = open(filename)
+    end
     schematic = readTAG(istream)
     if schematic.name != "Schematic"
-        error("$istream is not a Schematic file.")
+        @error("$istream is not a Schematic file. Is it GZip compressed ?")
     end
 
     Height, Length, Width = 0, 0, 0
@@ -258,9 +281,9 @@ function importSchematic(istream::IO)
 
     # Check for corruption
     if Height  < 1 || Width < 1 || Length < 1
-        error("Illegal model dimensions. Cannot be imported.")
+        @error("Illegal model dimensions. Cannot be imported.")
     elseif length(BlockIds) != length(BlockData)
-        error("Illegal model. Cannot be imported.")
+        @error("Illegal model. Cannot be imported.")
     end
 
     # Coordinates in schematics range from (0,0,0) to (Width-1, Height-1, Length-1).
@@ -277,4 +300,31 @@ function importSchematic(istream::IO)
     end
 
     return model
+end
+
+function exportSchematic(m::Array{Block, 3}, filename::AbstractString)
+    stream = GZip.open(filename, "w")
+    (Width, Height, Length) = size(m)
+    dataArr = Array{UInt8, 1}(undef, Width*Length*Height)
+    idArr = Array{UInt8, 1}(undef, Width*Length*Height)
+    for Y in 1:Height
+        for X in 1:Width
+            for Z in 1:Length
+                i = ((Y - 1)*Length + (Z - 1))*Width + X
+                idArr[i], dataArr[i] = m[X, Y, Z].id, m[X, Y, Z].data
+            end
+        end
+    end
+    final = Array{NBTag, 1}(undef, 8)
+    final[1] = TAG_Short(true, "Width", Width)
+    final[2] = TAG_Short(true, "Height", Height)
+    final[3] = TAG_Short(true, "Length", Length)
+    final[4] = TAG_String(true, "Materials", "Alpha")
+    final[5] = TAG_Byte_Array(true, "Blocks", idArr)
+    final[6] = TAG_Byte_Array(true, "Data", dataArr)
+    final[7] = TAG_List(true, "Entities", Array{TAG_Compound, 1}())
+    final[8] = TAG_List(true, "TileEntities", Array{TAG_Compound, 1}())
+    writeTAG(stream, TAG_Compound(true, "Schematic", final))
+    close(stream)
+    return
 end

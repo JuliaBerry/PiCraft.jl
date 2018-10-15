@@ -18,7 +18,13 @@ makedocs(
    sitename = "PiCraft",
    pages = Any[
        "Home" => "index.md",
-       "Quick Start" => "quick.md",
+       "Quick Start" => Any[
+            "Installation" => "installation.md",
+            "Connecting" => "connecting.md",
+            "Coordinate System" => "coordinateSystem.md",
+            "Blocks and Models" => "blocksAndModels.md",
+            "Events, Entities and Camera" => "eventsEntitiesCamera.md"
+       ],
        "Examples" => Any[
             "Safe Feet" => "example/safeFeet.md",
             "Turn to Gold" => "example/turnToGold.md",
