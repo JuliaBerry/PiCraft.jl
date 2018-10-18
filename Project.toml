@@ -1,0 +1,7 @@
+name = "PiCraft"
+uuid = "69717da6-cf88-11e8-24a8-ebf402b91a56"
+version = "0.1.0"
+
+[deps]
+GZip = "92fee26a-97fe-5a0c-ad85-20a5f3185b63"
+Sockets = "6462fe0b-24de-5631-8697-dd941f90decc"

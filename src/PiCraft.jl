@@ -1,6 +1,7 @@
 module PiCraft
 
 using Sockets
+using GZip
 
 include("blocks.jl")
 include("turtle.jl")
@@ -13,8 +14,8 @@ export setting, saveWorld, restoreWorld, post, getTile, setTile, getPos, setPos,
 export clearEvents, camera
 export turtle, move, yaw, pitch, roll
 export drawLine
-export parseNBT, importSchematic
-export buildModel, copyModel, cutModel, flip, rotate
+export parseNBT, importSchematic, exportSchematic
+export buildModel, copyModel, cutModel, flip, rotate, rotate!
 
 mutable struct World
     s::Sockets.TCPSocket
@@ -139,6 +140,20 @@ function post(m...)
         s *= string(x)
     end
     PiCraft.mc_send("chat.post($(s)", false)
+end
+
+function getChatEvents()
+    ChatEventsRaw = []
+    for j in PiCraft.mc_send("events.chat.posts()", true)
+        for s in split(j, "|")
+            length(s) > 0 && push!(ChatEventsRaw, s)
+        end
+    end
+    ChatEvents = Array{Tuple{Int, String}, 1}(undef, Int(length(ChatEventsRaw)/2))
+    for i in 1:length(ChatEvents)
+        ChatEvents[i] = (parse(Int, ChatEventsRaw[2*i - 1]), ChatEventsRaw[2*i])
+    end
+    return ChatEvents
 end
 
 """
