@@ -1,5 +1,5 @@
 name = "PiCraft"
-uuid = "69717da6-cf88-11e8-24a8-ebf402b91a56"
+uuid = "6cc4b21d-cec8-58d5-a373-5cd579ce5971"
 version = "0.1.0"
 
 [deps]
