@@ -1,5 +1,5 @@
 using PiCraft
-using Base.Test
+using Test
 
 
 b=Block(PiCraft.AIR)
