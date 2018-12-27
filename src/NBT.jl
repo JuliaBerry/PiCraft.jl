@@ -1,7 +1,8 @@
-# ParseNBT files and import/export .schematic files
+# Parse NBT files and import/export .schematic files
 #
-# NBT is a file format used by Minecraft to store data. https://minecraft.gamepedia.com/NBT_format
-# A specification was provided by Notch which can be accessed using archive.org
+# NBT is a file format used by Minecraft to store data.
+# https://minecraft.gamepedia.com/NBT_format
+# A specification was provided by Notch which can be accessed at archive.org
 # http://web.archive.org/web/20110723210920/http://www.minecraft.net/docs/NBT.txt
 #
 # The format of a Named Tag is :
@@ -14,7 +15,7 @@
 #
 # NBT files are mostly GZip Compressed however there are places where unzipped
 # files are used.
-# Use the GZip.jl Package to read/write GZip streams: https://github.com/JuliaIO/GZip.jl
+# We use the GZip.jl Package to read/write GZip streams: https://github.com/JuliaIO/GZip.jl
 #
 # We don't differentiate between Named and Nameless files. Nameless Tags are
 # Named Tags with an empty string as their name.
@@ -238,6 +239,7 @@ while !(eof(istream))
     printTAG(readTAG(istream), ostream, 0)
 end
 close(istream)
+return 0
 end
 
 """
