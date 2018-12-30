@@ -4,11 +4,11 @@
 
 last_commit=readchomp(`git --no-pager log -1 --pretty=format:"%h:%s"`)
 
-ENV["GIT_DIR"]=abspath(chomp(readstring(`git rev-parse --git-dir`)))
+ENV["GIT_DIR"]=abspath(chomp(String(read(`git rev-parse --git-dir`))))
 
-old_sha = chomp(readstring(`git rev-parse refs/remotes/origin/gh-pages`))
+old_sha = chomp(String(read(`git rev-parse refs/remotes/origin/gh-pages`)))
 
-run(`julia make.jl`)
+include("make.jl")
 
 cd("build") do
 
@@ -16,16 +16,16 @@ cd("build") do
     ENV["GIT_INDEX_FILE"]=gif
     ENV["GIT_WORK_TREE"]=pwd()
     run(`git add -A`)
-    tsha=chomp(readstring(`git write-tree`))
+    tsha=chomp(String(read(`git write-tree`)))
     mesg="Deploy docs for master@$last_commit"
 
     if length(old_sha) == 40
-        csha = chomp(readstring(`git commit-tree $tsha -p $old_sha -m $(mesg)`))
+        csha = chomp(String(read(`git commit-tree $tsha -p $old_sha -m $(mesg)`)))
     else
-        csha = chomp(readstring(`git commit-tree $tsha -m $(mesg)`))
+        csha = chomp(String(read(`git commit-tree $tsha -m $(mesg)`)))
     end
 
-     print("Created commit $csha")
+     println("Created commit $csha")
 
      run(`git --no-pager show $csha --stat`)
 
