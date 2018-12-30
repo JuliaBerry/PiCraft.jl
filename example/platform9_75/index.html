@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Platform 9¾ · PiCraft</title><link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" rel="stylesheet" type="text/css"/><link href="https://fonts.googleapis.com/css?family=Lato|Roboto+Mono" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL="../.."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.min.js" data-main="../../assets/documenter.js"></script><script src="../../siteinfo.js"></script><script src="../../../versions.js"></script><link href="../../assets/documenter.css" rel="stylesheet" type="text/css"/><link href="../../assets/custom.css" rel="stylesheet" type="text/css"/></head><body><nav class="toc"><h1>PiCraft</h1><select id="version-selector" onChange="window.location.href=this.value" style="visibility: hidden"></select><form class="search" id="search-form" action="../../search/"><input id="search-query" name="q" type="text" placeholder="Search docs"/></form><ul><li><a class="toctext" href="../../">Home</a></li><li><span class="toctext">Quick Start</span><ul><li><a class="toctext" href="../../installation/">Installation</a></li><li><a class="toctext" href="../../connecting/">Connecting</a></li><li><a class="toctext" href="../../coordinateSystem/">Coordinate System</a></li><li><a class="toctext" href="../../blocksAndModels/">Blocks and Models</a></li><li><a class="toctext" href="../../eventsEntitiesCamera/">Events, Entities and Camera</a></li></ul></li><li><span class="toctext">Examples</span><ul><li><a class="toctext" href="../safeFeet/">Safe Feet</a></li><li><a class="toctext" href="../turnToGold/">Turn to Gold</a></li><li><a class="toctext" href="../turtle/">Turtle</a></li><li><a class="toctext" href="../skyscraperBasic/">Sky Scraper</a></li><li><a class="toctext" href="../GameOfLife/">Game Of Life</a></li><li class="current"><a class="toctext" href>Platform 9¾</a><ul class="internal"></ul></li></ul></li><li><a class="toctext" href="../../blocks/">Block Reference</a></li><li><a class="toctext" href="../../api/">API Reference</a></li></ul></nav><article id="docs"><header><nav><ul><li>Examples</li><li><a href>Platform 9¾</a></li></ul><a class="edit-page" href="https://github.com/TRAVIS_REPO_SLUG/blob/master/"><span class="fa"></span> Edit on GitHub</a></nav><hr/><div id="topbar"><span>Platform 9¾</span><a class="fa fa-bars" href="#"></a></div></header><h1><a class="nav-anchor" id="Platform-9-1" href="#Platform-9-1">Platform 9¾</a></h1><p>In this example we will explore Platform 9 and three quarters of King&#39;s cross station, London</p><p>At the beginning of an academic year of Hogwarts School of Witchcraft and Wizardry a large number of students choose to travel using the Hogwards Express. The train departs from platform 9 and three quarters, King&#39;s Cross Station, London. To reach this platform wizards and witches must run into an arch between the platforms 9 and 10 to be teleported the 9¾ platform. However due a certain number of mishaps/accidents over the years the Ministry of Magic has made new rules.</p><p>Only those heading into the wall at a predetermined speed of 4.3 m/s may be teleported. Too slow and the wizrd might be folling around and too fast might result in a minor injury or worse... Being spotted by a muggle which the ministry will then have obliviate. PS : The ministry has now enforced the metric system for all official work. Hence the speed is mentioned in meters per second.</p><div><pre><code class="language-julia">using PiCraft</code></pre></div><p>First let us make the platforms (Muggle and Wizard world) Let&#39;s first make the muggle platform (9 &amp; 10) and then place a platform perpendicular to that beneath</p><pre><code class="language-">p = getTile()
+setBlocks(p .+ (1, 0, 1), p .+ (12, 1, 40), Block(43, 5)) # Make a cobblestone platform
+setBlocks(p .+ (5, 2, 1), p .+ (8, 12, 40), Block(45))    # For Brick arches</code></pre><p>Now we want to make arches in the brick column. For now semi-circular arches will do The equation for a general circle is <code>x^2 + y^2 = r^2</code> where <code>r</code> is the radius So in general if we have a point: (a, b, c) and we wish to make a circle around it we might do something like this:- (Say in the x-y plane)</p><pre><code class="language-none">for x = -r:sign(r):r, y = -r:sign(r):r
+    if x^2 + y^2 &lt;= r^2
+        setBlock(p .+ (x, y, 0), Block(1,0))
+    end
+end</code></pre><p>However, since we have to make a semicircle we should only iterate y from 0 to r</p><pre><code class="language-">r = 9
+c1 = p .+ (5, 2, 11) # Center for 1st arch
+for y = 0:r, z = -r:r
+    if y^2 + z^2 &lt; r^2
+        setBlocks(c1 .+ (0, y, z), c1 .+ (3, y, z), Block(0))
+    end
+end
+
+c2 = p .+ (5, 2, 40 - 10)
+for y = 0:r, z = -r:r
+    if y^2 + z^2 &lt; r^2
+        setBlocks(c2 .+ (0, y, z), c2 .+ (3, y, z), Block(0))
+    end
+end</code></pre><p><img src="../../assets/img/Platform9_75/Platform.gif" alt="Platform.gif"/></p><p>Now we must now choose a reasonable condition to teleport One way can be: If player velocity in <code>z</code> direction and position is encosed within x: p[1] + 5:8 , y: p[2] + 2, z: 20.3 then teleport to desired location.</p><p>Now how do we calculate velocity ? Velocity is the rate at which an object&#39;s position changes w.r.t time. We can compute velocity as follows:</p><pre><code class="language-none">p1 = getPos()
+sleep(0.05)
+p2 = getPos()
+vel = (p2 - p1)./0.05 # velocity = distance/time</code></pre><p>This gives us the velocity component of each direction. To get the true instantaneous velocity we have to take the norm of this. <code>v = norm([velocity...]) # We effectively does v = sqrt(vel_x^2 + vel_y^2 + vel_z^2)</code> However we only care about a wizard&#39;s z-component of velocity which will be vel[3]</p><pre><code class="language-">function getVel()
+    p1 = getPos()
+    sleep(0.05)
+    vel = getPos() .- p1
+    return vel[3]/0.05
+end
+
+t = time()
+while time() - t &lt; 10
+    post(&quot;Velocity = &quot;*string.(getVel())*&quot; m/s&quot;)
+end</code></pre><p><img src="../../assets/img/Platform9_75/getVel.png" alt="getVel.png"/></p><p>Since platform 9¾ remains closed for most of the year we can add a time constraint to automatically close it.</p><pre><code class="language-">t = time()
+post(&quot;Platform 9¾ open!&quot;)
+while time() - t &lt; 30 # Platform closes in 30 seconds
+    v = getVel()
+    pos = getPos()
+    if v &gt;= 4.20 &amp;&amp; v &lt;= 4.32
+        if pos[1] &lt; p[1] + 9 &amp;&amp; pos[1] &gt; p[1] + 4 &amp;&amp; pos[2] == p[2] + 2 &amp;&amp; pos[3] &gt; p[3] + 19.3
+            setPos(p)
+        end
+    end
+end
+post(&quot;Platform 9¾ closed!&quot;)</code></pre><p>Now, We wish to make an identical copy of this planform.</p><pre><code class="language-">m = copyModel(p .+ (1, 0, 1), p .+ (12, 12, 40))
+buildModel(rotate(m, dir = :l, dim = :y), p .+ (1, 15, 1))</code></pre><p>This built a copy of the platform which is perpendicular and above it. Place the new plaform anywhere you desire. Then set <code>p</code> to the coordinates of the arch.</p><p><em>This page was generated using <a href="https://github.com/fredrikekre/Literate.jl">Literate.jl</a>.</em></p><footer><hr/><a class="previous" href="../GameOfLife/"><span class="direction">Previous</span><span class="title">Game Of Life</span></a><a class="next" href="../../blocks/"><span class="direction">Next</span><span class="title">Block Reference</span></a></footer></article></body></html>

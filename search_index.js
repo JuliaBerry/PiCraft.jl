@@ -1,7 +1,7 @@
 var documenterSearchIndex = {"docs": [
 
 {
-    "location": "index.html#",
+    "location": "#",
     "page": "Home",
     "title": "Home",
     "category": "page",
@@ -9,7 +9,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#PiCraft-1",
+    "location": "#PiCraft-1",
     "page": "Home",
     "title": "PiCraft",
     "category": "section",
@@ -17,7 +17,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Overview-1",
+    "location": "#Overview-1",
     "page": "Home",
     "title": "Overview",
     "category": "section",
@@ -25,7 +25,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Installation-1",
+    "location": "#Installation-1",
     "page": "Home",
     "title": "Installation",
     "category": "section",
@@ -33,7 +33,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Get-Minecraft-1",
+    "location": "#Get-Minecraft-1",
     "page": "Home",
     "title": "Get Minecraft",
     "category": "section",
@@ -41,7 +41,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Get-RaspberryJuice-or-RaspberryJamMod-(for-Minecraft:-Java-edition)-1",
+    "location": "#Get-RaspberryJuice-or-RaspberryJamMod-(for-Minecraft:-Java-edition)-1",
     "page": "Home",
     "title": "Get RaspberryJuice or RaspberryJamMod (for Minecraft: Java edition)",
     "category": "section",
@@ -49,7 +49,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Get-Julia-1",
+    "location": "#Get-Julia-1",
     "page": "Home",
     "title": "Get Julia",
     "category": "section",
@@ -57,7 +57,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "index.html#Install-the-PiCraft-packge-1",
+    "location": "#Install-the-PiCraft-packge-1",
     "page": "Home",
     "title": "Install the PiCraft packge",
     "category": "section",
@@ -65,39 +65,215 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "quick.html#",
-    "page": "Quick Start",
-    "title": "Quick Start",
+    "location": "installation/#",
+    "page": "Installation",
+    "title": "Installation",
     "category": "page",
-    "text": "Load the PiCraft package on the Julia console:using PiCraftOn load, the library will attempt to connect to a running Minecraft world on localhost. If Minecraft is not running, an error message will be printed. Subsequently, once Minecraft has been started,  a connection can be forced by calling connectToWorld()You can save and restore your progress using the commands:Save: save()\nLoad last savepoint: restore()A 3-D coordinate system is used to describe the Minecraft world. Throughout this package we describe a set of coordinates using a Tuple of numbers, for example (3.5, 19, 7) describes a position in the Minecraft World. The 2nd attribute of the Tuple describes the y-axis or height. When in game it is convenient to find the player coordinates by opening the debug menu.(Image: )"
+    "text": ""
 },
 
 {
-    "location": "quick.html#Player-1",
-    "page": "Quick Start",
-    "title": "Player",
+    "location": "installation/#Installation-1",
+    "page": "Installation",
+    "title": "Installation",
     "category": "section",
-    "text": "You can find and set your player\'s location:Find Player position: getPos()\nReturns a Tuple{Float64, Float64, Float64} which contains the player\'s current coordinates.\nSet Player position: setPos(pos::Tuple{Float64, Float64, Float64})\nTeleports the player to the specified coordinates."
+    "text": ""
 },
 
 {
-    "location": "quick.html#Blocks-1",
-    "page": "Quick Start",
+    "location": "installation/#Install-Minecraft(Mod/Plugin)-1",
+    "page": "Installation",
+    "title": "Install Minecraft(+Mod/Plugin)",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "installation/#Minecraft:-Pi-1",
+    "page": "Installation",
+    "title": "Minecraft: Pi",
+    "category": "section",
+    "text": "Minecraft: Pi is free and comes pre-installed on all Rasbian since September 2014. Launch it by navigating to Menu > Games or typing minecraft-pi in the terminal. However, if you are running an older version of Raspbian get the game here. Refer to the same link if you are unable to launch it.Note that Minecraft: Pi can seem limited compared to the Java version. If you have a powerful computer and access to a Minecraft: Java license then you should consider using that platform."
+},
+
+{
+    "location": "installation/#Minecraft:-Java-1",
+    "page": "Installation",
+    "title": "Minecraft: Java",
+    "category": "section",
+    "text": "Minecraft: Java can be purchased and downloaded here. Follow the installation instructions provided there. The Java edition works on Windows, Linux and MacOS. However, we will need either RaspberryJamMod or RaspberryJuice to run PiCraft."
+},
+
+{
+    "location": "installation/#RaspberryJamMod-1",
+    "page": "Installation",
+    "title": "RaspberryJamMod",
+    "category": "section",
+    "text": "This is a forge mod. The package is hosted here.First we need to install Forge which can be found here. If you are on windows then download the Windows Installer else download the Installer. Simply run the windows installer and follow the instructions on screen.On linux/macOS the installer will be named something like forge-1.12.2-14.23.4.2749-installer.jarTo run the installer open the Terminal from Applications and head over to the directory where the installer is present. Then run it by doing the follows:cd Documents\njar -jar forge-1.12.2-14.23.4.2749-installer.jarClick Install client then click OK. Upon completion Forge should be installed.Now we need to install the mod. For this download the mods.zip file from the RaspberryJamMod github page.To install the mod we need to extract it to the mods folder in the minecraft directory. The location for the the .minecraft directory for each OS is given below.OS Location\nWindows %APPDATA%.minecraft\nmacOS ~/Library/Application Support/minecraft\nLinux ~/.minecraftNow head over to this location and create a folder named mods. Copy the previously downloaded mods.zip file here and extract it. The mod is now installed.Next time you launch Minecraft select the forge version."
+},
+
+{
+    "location": "installation/#RaspberryJuice-1",
+    "page": "Installation",
+    "title": "RaspberryJuice",
+    "category": "section",
+    "text": "This is a Bukkit plugin. If you wish to operate a server with many clients then this is probably the best way to go. You will need to first setup CraftBukkit and then install the plugin. Refer to the Bukkit Forums and Docs for instructions and help.There is also an easy option and that is to grab the Adventures in Minecraft starter kit for your OS and then run it. Grab the Kit here. Adventures in Minecraft is a book aimed at kids to teach them programming(python) using the Minecraft: Pi API. This starter pack is provided by them and is an extremely easy way to setup the environment we need."
+},
+
+{
+    "location": "installation/#Install-Julia-1",
+    "page": "Installation",
+    "title": "Install Julia",
+    "category": "section",
+    "text": "Get the latest stable release of Julia here.For the Raspberry Pi download the Generic Linux Binaries for ARM. We need to extract the tar.gz file then create a symbolic link to julia.cd ~/Downloads\ntar -xvf julia-1.0.0-linux-armv7l.tzr.gz\nsudo ln -s ~/julia-1.0.0/bin/julia /usr/bin/julia\njuliaThis should launch julia. Whenever you need to open julia open the terminal and enter julia.This should install a REPL shell. REPL stands for Read-Eval-Print-Loop. This is an interactive shell in which you can run your code(Like Python\'s IDLE). While, it is possible to do everything in this shell there are other options to choose from as an IDE(Integrated Development Environment).Most popular options are Jupyter Notebooks and Juno.Juno is built on Atom and adds Julia-specific enhancements, such as syntax highlighting, a plot pane, integration with Julia\'s debugger (Gallium) , a console for running code, and much more. You can read more about it and get appropriate installation instructions here.Juno(and Atom) is a bit resource hungry compared to other editors hence is not recommended for systems with low specs like the Raspberry Pi. It is recommended that you use the REPL shell or Jupyter notebook for slower machines.Jupyter notebook is a web application in which you can run julia code. You need the IJulia package to run Julia from this notebook. Get IJulia here. One benefit of using a Jupyter notebook is that you can run Minecraft in full screen on one computer and use another computer/tablet\'s browser to write and execute code for convenience."
+},
+
+{
+    "location": "connecting/#",
+    "page": "Connecting",
+    "title": "Connecting",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "connecting/#Load-and-Connect-1",
+    "page": "Connecting",
+    "title": "Load and Connect",
+    "category": "section",
+    "text": "Launch Minecraft and Julia.\nIf you don\'t have the PiCraft package then get it by:using Pkg\nPkg.add(\"https://github.com/JuliaBerry/PiCraft.jl\")Now load the package by:using PiCraftIf you get an error saying \"Unable to connect to minecraft world\" thenMinecraft may not be running. You need to be inside a World not the launch screen/menu.\nRaspberryJamMod may not be correctly installedIf you wish to connect to a instance running on another computer running on your network then:Find the minecraft host\'s ip address from your router configuration page or by using an appropriate terminal command.\nWindows: ipconfig /all\nLinux: hostname -I\nMacOS: ifconfig | grep \"inet \" | grep -v 127.0.0.1Connect using the connectToWorld(address, port = 4711) function.\nTo check whether everything\'s working enter post(\"Hello World!\") in the julia terminal.\nYou should see \"Hello World!\" displayed in the minecraft chat.(Image: hello-world)If you face any issues please open an issue on the PiCraft github or reach us on the julialang slack\'s #PiCraft channel."
+},
+
+{
+    "location": "coordinateSystem/#",
+    "page": "Coordinate System",
+    "title": "Coordinate System",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "coordinateSystem/#D-coordinate-system-1",
+    "page": "Coordinate System",
+    "title": "3-D coordinate system",
+    "category": "section",
+    "text": "A 3-D coordinate system is used to describe the Minecraft world. Throughout this package we describe a set of coordinates using a Tuple of numbers, for example (3.5, 19, 7) describes a position in the Minecraft World. The 2nd attribute of the tuple describes the y-axis or height. When in game it is convenient to find the player coordinates by opening the debug menu using f3.Here, are a few commands associated with positions.getPos(): Returns the tuple containg the player\'s coordinates\nsetPos(x, y, z): Teleport the player to the coordinates (x, y, z)For example, setPos(getPos() .+ (0, 10, 0)) moves the player up by 10 units.getBlock(pos::Tuple{Real, Real, Real}): Returns the block information\nsetBlock(pos::Tuple{Real, Real, Real}, block::Block): Place block at pos.More information on blocks and the Block type will be provided in the next section."
+},
+
+{
+    "location": "coordinateSystem/#Arrays-and-Tuples-1",
+    "page": "Coordinate System",
+    "title": "Arrays and Tuples",
+    "category": "section",
+    "text": "Array and Tuple are the simplest containers. An array is an ordered collection of elements often used to store lists, tables, vectors and matrices. A tuple is also an ordered collection but of immutable elements. Immutable means that once a tuple is created it cannot be altered. Tuples are generally used for small fixed length collections.Both are 1-indexed meaning that the first element is accessed by a[1] where a is the container. Many if not most programming languages use 0 based indexing but trying to access the 0th element of a container will result in an error in Julia.Refer to the Introducing Julia wikibook\'s Arrays and Tuples page here for more information."
+},
+
+{
+    "location": "blocksAndModels/#",
+    "page": "Blocks and Models",
+    "title": "Blocks and Models",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "blocksAndModels/#Blocks-and-Models-1",
+    "page": "Blocks and Models",
+    "title": "Blocks and Models",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "blocksAndModels/#Blocks-1",
+    "page": "Blocks and Models",
     "title": "Blocks",
     "category": "section",
-    "text": "Blocks are the heart of Minecraft. The package provides the ability to modify blocks at specified coordinates. Block is an immutable datatype defined in src/blocks.jl.immutable Block\n    id::Int\n    data::Int\nendThe id defines the type of block (like cobblestone, wool, wood,.etc) and the data attribute defines additional characteristics of the block, on default every block has it data set to 0. For example, Wool\'s block id is 35, Block(35,0) refers to a block of white wool. Different wool colors can be accessed by changing the data attribute. Red Wool is Block(35, 14), Pink Wool is Block(35,6) and so on. A complete reference can be found in the documentation.Place Block: setBlock(Tuple{Int,Int,Int}, block::Block)\nPlace the specified Block at the specified coordinates.\nPlace Blocks: setBlocks(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)\nSet an entire region to the specified block type defined by the corners p1 and p2.\nGet Block information: getBlock(Tuple{Int,Int,Int})\nReturns the block present at the specified coordinates.While the getBlock and setBlock functions will accept Float64 as arguments but these will be rounded to Int as a block cannot be placed on non-integer coordinates."
+    "text": "This package provides the ability to modify blocks at specified coordinates.Block is an immutable datatype defined in src/blocks.jl.struct Block\n    id::Int\n    data::Int\nendThe id defines the type of block (like cobblestone, wool, wood,.etc) and the data attribute defines additional characteristics of the block, on default every block has its data set to 0. For example, Wool\'s block id is 35, Block(35,0) refers to a block of white wool. Different wool colors can be accessed by changing the data attribute. Red Wool is Block(35, 14), Pink Wool is Block(35,6) and so on. A complete reference can be found in the documentation.Id Name Subtype Image Data\n35 Wool White (Image: mc-block) 0\n  Orange (Image: mc-block) 1\n  Magenta (Image: mc-block) 2\n  Light Blue (Image: mc-block) 3\n  Yellow (Image: mc-block) 4\n  Lime (Image: mc-block) 5\n  Pink (Image: mc-block) 6Place Block: setBlock(Tuple{Int,Int,Int}, block::Block)\nPlace the specified Block at the specified coordinates.\nPlace Blocks: setBlocks(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)\nSet an entire region to the specified block type defined by the corners p1 and p2.\nGet Block information: getBlock(Tuple{Int,Int,Int})\nReturns the Block present at the specified coordinates.While getBlock and setBlock functions will accept any Real as arguments these will be rounded to Int as a block cannot be placed on non-integer coordinates."
 },
 
 {
-    "location": "quick.html#Models-1",
-    "page": "Quick Start",
+    "location": "blocksAndModels/#Models-1",
+    "page": "Blocks and Models",
     "title": "Models",
     "category": "section",
-    "text": "A model is a 3-D Array of Blocks. Whenever we refer to a model we more specifically mean Array{Block, 3}. Storing a model can be convenient way to write scripts. For example if we have a streetlight stored as a model we can easily write a script to copy and paste at equal intervals on a street. There are model manipulation functions available such as:Copy Model: copyModel(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real})\nCopy the Blocks between the diagonally opposite blocks and store in a 3-D Block Array.\nCut Model: cutModel(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)\nCopy blocks between diagonally opposite blocks and fill the space with block.\nFlip Model: flip(A::Array{Block, 3}, dim::Symbol)\nFlip a Block Array in a particular dimension. Dimensions are x, y and z\nRotate Model"
+    "text": "The minecraft community has made a large number of fantastic creations over the years. Models allow us to share, collaborate and improve their work. Generally, Models are shared in the .schematic file format which is a type of NBT file(Named Binary Type). What we mean by a Model is a 3-Dimensional array of Blocks(Array{Block, 3}). minecraft-schematics and planetminecraft  are popular websites which host community provided schematic files. Schematic  files are the standard way to import and export models using software like  MCEdit and WorldEdit."
 },
 
 {
-    "location": "example/safeFeet.html#",
+    "location": "blocksAndModels/#Importing-.schmatic-files-1",
+    "page": "Blocks and Models",
+    "title": "Importing .schmatic files",
+    "category": "section",
+    "text": "Let\'s try to import a sample file. It\'s named sample.schematic and located in  the example folder.This is the model we will be importing:  (Image: sample-model)It\'s composed of gold and diamond blocks as the colors indicate and the coordinate  axes have been marked.The schematic file can be found in the Examples folder or hereCopy this file to a convenient location like your desktop or documents folder. Now to go to this location we can use the Command Prompt/Shell commands.Enter the ; character to go into shell mode in a Julia REPL interface. Or you could also use the run() command. For instance to find your current location use cd on Windows and pwd on linux/MacOS.shell> ls\nappveyor.yml  example	  Manifest.toml  README.md  src\ndocs	      LICENSE.md  Project.toml	 REQUIRE    test\n\nshell> cd ~/Documents\n/home/user/Documents\n\njulia> run(`ls`)\nsample.nbt\nProcess(`ls`, ProcessExited(0))\nNow to import our model use the importSchematic(filename::AbstractString) function.m = importSchematic(\"./sample.schematic\")\n3×2×4 Array{Block,3}:\n[:, :, 1] =\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(0, 0)\n\n[:, :, 2] =\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(0, 0)\n\n[:, :, 3] =\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(57, 0)\n\n[:, :, 4] =\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(0, 0)\n Block(41, 0)  Block(57, 0)\nIt would be helpful to try to relate the information above with the illustration of the model. Notice the indexing is [X, Y, Z]"
+},
+
+{
+    "location": "blocksAndModels/#Model-Functions-1",
+    "page": "Blocks and Models",
+    "title": "Model Functions",
+    "category": "section",
+    "text": "Here are the functions you can use with modelsbuildModel(m::Array{Block,3}, pos::Tuple{Real, Real, Real})\ncopyModel(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real})\ncutModel(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block = Block(0, 0))\nflip(A::Array{Block, 3}, dim::Symbol)\nrotate(A::Array{Block, 3}; dir::Symbol = :l, dim::Symbol = :x)To build the model:julia> pos = getTile()\n\njulia> buildModel(m, pos)\n\njulia> #= This should have build a model, Look in the southeast direction.\n          Now to copy the model, we must know it corner\'s coordinates.      =#\njulia> size(m)\n(3, 2, 4)\n\njulia> m2 = copyModel(pos .+ (1, 0, 1), pos .+ size(m) .- (0, 1, 0));\n\njulia> m2 == m\ntrue\n\njulia> cutModel(pos .+ (1, 0, 1), pos .+ size(m) .- (0, 1, 0))\n\njulia> # The build model should now me replace by air.Flipping and rotating are operations essential to constructing symmetric structures.flip() can perform a flip in the x-y(:z), y-z(:x) or x-z(:y) plane. To flip our model upside down we have to flip it in the x-z plane.julia> m2 = flip(m, :y)\n3×2×4 Array{Block,3}:\n[:, :, 1] =\n Block(0, 0)  Block(41, 0)\n Block(0, 0)  Block(41, 0)\n Block(0, 0)  Block(41, 0)\n\n[:, :, 2] =\n Block(0, 0)  Block(41, 0)\n Block(0, 0)  Block(41, 0)\n Block(0, 0)  Block(41, 0)\n\n[:, :, 3] =\n Block(0, 0)   Block(41, 0)\n Block(0, 0)   Block(41, 0)\n Block(57, 0)  Block(41, 0)\n\n[:, :, 4] =\n Block(0, 0)   Block(41, 0)\n Block(0, 0)   Block(41, 0)\n Block(57, 0)  Block(41, 0)\n\n julia> buildModel(m2, pos)It would be helpful if you try to understand how the Array changes upon a flip. Similarly try to flip the model in other dimensions and build it to see the changes. (flip(m, :x) & flip(m, :z))Rotating a model requires two parameters.     1. The plane in which we will rotate. (dim) (:x, :y, :z)     2. Direction of rotating.(dir) (:l, :r)Like flipping :x as the dimension indicates a rotation in the y-z plane. And similarly for other dimensions as well. :l indicates a rotation in the counter-clockwise direction and :r indicates a rotation in the clockwise direction when you are looking in the positive direction of the dimension.Unlike flipping, a rotation might change the dimension of the model.Here, a script which shows a rotation animation.julia> for i in 1:4\n            cutModel(pos .+ (1, 0, 1), pos .+ size(m) .- (0, 1, 0), Block(0,0))\n            m = rotate(m, :l, :y)\n            buildModel(m, pos)\n            sleep(1)\n        endHere we build a Model, wait for a second, remove it, rotate it and repeat for 4 times."
+},
+
+{
+    "location": "eventsEntitiesCamera/#",
+    "page": "Events, Entities and Camera",
+    "title": "Events, Entities and Camera",
+    "category": "page",
+    "text": ""
+},
+
+{
+    "location": "eventsEntitiesCamera/#Events,-Entities-and-Camera-1",
+    "page": "Events, Entities and Camera",
+    "title": "Events, Entities and Camera",
+    "category": "section",
+    "text": ""
+},
+
+{
+    "location": "eventsEntitiesCamera/#Event-1",
+    "page": "Events, Entities and Camera",
+    "title": "Event",
+    "category": "section",
+    "text": "There are two types of events: Hit events and Chat events"
+},
+
+{
+    "location": "eventsEntitiesCamera/#Hit-Event-1",
+    "page": "Events, Entities and Camera",
+    "title": "Hit Event",
+    "category": "section",
+    "text": "If you equip your player with a sword and right click to hit a block then that hit will be recorded and is effectively a \'HitEvent\'. Use the pollBlockHits() function to get an array of all of these events. Each event is described by a tuple ((x, y, z), face, entityId). x, y and z are the coordinates of the block. face is the block\'s face number which was hit and entityId identifies the player who hit the block using a sword.Check out the turntogold example to find out how it can be used."
+},
+
+{
+    "location": "eventsEntitiesCamera/#Chat-Event-1",
+    "page": "Events, Entities and Camera",
+    "title": "Chat Event",
+    "category": "section",
+    "text": "We can find out all the chat messages posted in the session using the getChatEvents() function.julia> getChatEvents()\n2-element Array{Tuple{Int64,String},1}:\n (152, \"Hello!\")               \n (152, \"Is anyone listening ?\")"
+},
+
+{
+    "location": "eventsEntitiesCamera/#Entity-1",
+    "page": "Events, Entities and Camera",
+    "title": "Entity",
+    "category": "section",
+    "text": "Each player is uniquely identified by an id called \'EntityId\'. Execute getPlayerIds() to get an array of all Entities connected to this session.julia> getPlayerIds()\n1-element Array{Int64,1}:\n 152You can also manipulate the position of any entity using the commands:getPos(entityId::Int)\nsetPos(pos::Tuple{Real, Real, Real})\ngetTile(entityId::Int)\nsetTile(entityId::Int, pos::Tuple{Real, Real, Real})"
+},
+
+{
+    "location": "eventsEntitiesCamera/#Camera-1",
+    "page": "Events, Entities and Camera",
+    "title": "Camera",
+    "category": "section",
+    "text": "Camera commands are only available on the Pi. Here are all the available camera commands.setNormal(entityId::Int)\nsetFixed()\nsetFollow(entityId::Int)\nsetPos(pos::Tuple{Real, Real, Real})"
+},
+
+{
+    "location": "example/safeFeet/#",
     "page": "Safe Feet",
     "title": "Safe Feet",
     "category": "page",
@@ -105,7 +281,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/safeFeet.html#Safe-Feet-1",
+    "location": "example/safeFeet/#Safe-Feet-1",
     "page": "Safe Feet",
     "title": "Safe Feet",
     "category": "section",
@@ -113,7 +289,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/safeFeet.html#Challenge:-1",
+    "location": "example/safeFeet/#Challenge:-1",
     "page": "Safe Feet",
     "title": "Challenge:",
     "category": "section",
@@ -121,7 +297,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/turnToGold.html#",
+    "location": "example/turnToGold/#",
     "page": "Turn to Gold",
     "title": "Turn to Gold",
     "category": "page",
@@ -129,7 +305,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/turnToGold.html#Turn-to-Gold-1",
+    "location": "example/turnToGold/#Turn-to-Gold-1",
     "page": "Turn to Gold",
     "title": "Turn to Gold",
     "category": "section",
@@ -137,7 +313,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/turnToGold.html#Turn-blocks-to-gold-by-hitting-them-1",
+    "location": "example/turnToGold/#Turn-blocks-to-gold-by-hitting-them-1",
     "page": "Turn to Gold",
     "title": "Turn blocks to gold by hitting them",
     "category": "section",
@@ -145,7 +321,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/turtle.html#",
+    "location": "example/turtle/#",
     "page": "Turtle",
     "title": "Turtle",
     "category": "page",
@@ -153,7 +329,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/turtle.html#Turtle-Programming-1",
+    "location": "example/turtle/#Turtle-Programming-1",
     "page": "Turtle",
     "title": "Turtle Programming",
     "category": "section",
@@ -161,15 +337,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/turtle.html#Introduction-1",
+    "location": "example/turtle/#Introduction-1",
     "page": "Turtle",
     "title": "Introduction",
     "category": "section",
-    "text": "In this tutorial we will have a look at Turtle Programming. In 1967 a general purpose programming language called LOGO was created. The main highlight of this language was turtle graphics. In turtle graphics we have a robot with a pen which draws on a canvas. We can control this turtle using a few commands. The main commands are :forward : move the turtle forward\nturn : turn the turtle\npenUp/penDown : activate/deactivate the turtle\'s penTo get a brief understanding of how this works head over here.While Turtle programming generally refers to a 2-D turtle we have a 3-D version available. In the 3-D version we have three types of turn available for each of the dimensions of the turtle.pitch\nyaw\nrollLet\'s first start with only operating on a 2-D plane and later we will discuss 3-D.You need to clear up space for experimentation. Use setBlocks() with PiCraft.AIR to clear up space. If you are on the Java edition then it is suggested that you use New World -> Creative -> World Type: Superflat -> Customize -> Presets -> The Void -> Create New World Then we can setup a canvas for drawing as follows:p = getPos()\nsetBlocks(p .+ (-50, 0, -50), p .+ (50, 0, 50), Block(35, 15))(Image: canvasSetup.png)To initialize the turtle:t = turtle(pos = p)Since we are only concerned with the 2 dimensions of the plane we only need a single turn function which will be yawturn = yaw\n\nmove(t, 10)\nturn(t, 45) # Note that the angle is in degrees, use `deg2rad(θ)` to convert from radians.\nmove(t, 10)\nt.penBlock = PiCraft.IRON_BLOCK # Change penBlock\nmove(t, 10)\nturn(t, 45)\nmove(t, 10)\nt.penDown = false\nturn(t, 90)\nmove(t, 10)\nt.penDown = true\nmove(t, 10)(Image: draw1.png) To reset the canvas and the turtle it can be convenient to define a functionfunction clrscr(t, p)\n    setBlocks(p .+ (-50, 0, -50), p .+ (50, 0, 50), Block(35, 15))\n    t.pos = p\nend\nclrscr(t, p)Draw a squaremove(t, 10)\nyaw(t, 90)\nmove(t, 10)\nyaw(t, 90)\nmove(t, 10)\nyaw(t, 90)\nmove(t, 10)(Image: square.png)We can also use a \'for loop\' for the sameclrscr(t, p)\nfor i in 1:4\n    move(t, 10)\n    yaw(t, 90)\nendSimilarly, we can draw a triangleDraw a triangleclrscr(t, p)\nfor i in 1:3\n    move(t, 10)\n    turn(t, 120)\nendChallenge: Figure out how to draw a general polygon using a loopSolution:function drawPolygon(t::turtle, n::Integer, l::Real)\n    θ = 180 - 360/n\n    for i in 1:n\n        move(t, l)\n        yaw(t, θ)\n    end\nend\n\nclrscr(t, p)Starfor i in 1:5\n    move(t, 50)\n    turn(t, 144)\nend(Image: star.png)We can also make spirals.Spiralclrscr(t, p)\nfor i in 1:10\n    move(t, 5*i)\n    turn(t, 90)\nend(Image: spiral1.png)clrscr(t, p)\nfor i in 1:10\n    move(t, 5 + 5*i)\n    turn(t, 120)\nend(Image: spiral2.png)"
+    "text": "In this tutorial we will have a look at Turtle Programming. In 1967 a general purpose programming language called LOGO was created. The main highlight of this language was turtle graphics. In turtle graphics we have a robot with a pen which draws on a canvas. We can control this turtle using a few commands. The main commands are :forward : move the turtle forward\nturn : turn the turtle\npenUp/penDown : activate/deactivate the turtle\'s penTo get a brief understanding of how this works head over here.While Turtle programming generally refers to a 2-D turtle we have a 3-D version available. In the 3-D version we have three types of turn available for each of the dimensions of the turtle.pitch\nyaw\nrollLet\'s first start with only operating on a 2-D plane and later we will discuss 3-D.You need to clear up space for experimentation. Use setBlocks() with PiCraft.AIR to clear up space. If you are on the Java edition then it is suggested that you use New World -> Creative -> World Type: Superflat -> Customize -> Presets -> The Void -> Create New World Then we can setup a canvas for drawing as follows:using PiCraft\np = getPos()\nsetBlocks(p .+ (-50, 0, -50), p .+ (50, 0, 50), Block(35, 15))(Image: canvasSetup.png)To initialize the turtle:t = turtle(pos = p)Since we are only concerned with the 2 dimensions of the plane we only need a single turn function which will be yawturn = yaw\n\nmove(t, 10)\nturn(t, 45) # Note that the angle is in degrees, use `deg2rad(θ)` to convert from radians.\nmove(t, 10)\nt.penBlock = PiCraft.IRON_BLOCK # Change penBlock\nmove(t, 10)\nturn(t, 45)\nmove(t, 10)\nt.penDown = false\nturn(t, 90)\nmove(t, 10)\nt.penDown = true\nmove(t, 10)(Image: draw1.png) To reset the canvas and the turtle it can be convenient to define a functionfunction clrscr(t, p)\n    setBlocks(p .+ (-50, 0, -50), p .+ (50, 0, 50), Block(35, 15))\n    t.pos = p\nend\nclrscr(t, p)Draw a squaremove(t, 10)\nyaw(t, 90)\nmove(t, 10)\nyaw(t, 90)\nmove(t, 10)\nyaw(t, 90)\nmove(t, 10)(Image: square.png)We can also use a \'for loop\' for the sameclrscr(t, p)\nfor i in 1:4\n    move(t, 10)\n    yaw(t, 90)\nendSimilarly, we can draw a triangleDraw a triangleclrscr(t, p)\nfor i in 1:3\n    move(t, 10)\n    turn(t, 120)\nendChallenge: Figure out how to draw a general polygon using a loopSolution:function drawPolygon(t::turtle, n::Integer, l::Real)\n    θ = 180 - 360/n\n    for i in 1:n\n        move(t, l)\n        yaw(t, θ)\n    end\nend\n\nclrscr(t, p)Starfor i in 1:5\n    move(t, 50)\n    turn(t, 144)\nend(Image: star.png)We can also make spirals.Spiralclrscr(t, p)\nfor i in 1:10\n    move(t, 5*i)\n    turn(t, 90)\nend(Image: spiral1.png)clrscr(t, p)\nfor i in 1:10\n    move(t, 5 + 5*i)\n    turn(t, 120)\nend(Image: spiral2.png)"
 },
 
 {
-    "location": "example/turtle.html#D-turtle-1",
+    "location": "example/turtle/#D-turtle-1",
     "page": "Turtle",
     "title": "3-D turtle",
     "category": "section",
@@ -177,7 +353,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/skyscraperBasic.html#",
+    "location": "example/skyscraperBasic/#",
     "page": "Sky Scraper",
     "title": "Sky Scraper",
     "category": "page",
@@ -185,7 +361,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/skyscraperBasic.html#Construct-a-skyscraper-1",
+    "location": "example/skyscraperBasic/#Construct-a-skyscraper-1",
     "page": "Sky Scraper",
     "title": "Construct a skyscraper",
     "category": "section",
@@ -193,7 +369,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/skyscraperBasic.html#makeSkyscraper()-1",
+    "location": "example/skyscraperBasic/#makeSkyscraper()-1",
     "page": "Sky Scraper",
     "title": "makeSkyscraper()",
     "category": "section",
@@ -201,7 +377,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/skyscraperBasic.html#makeSkyscraper2()-1",
+    "location": "example/skyscraperBasic/#makeSkyscraper2()-1",
     "page": "Sky Scraper",
     "title": "makeSkyscraper2()",
     "category": "section",
@@ -209,7 +385,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/GameOfLife.html#",
+    "location": "example/GameOfLife/#",
     "page": "Game Of Life",
     "title": "Game Of Life",
     "category": "page",
@@ -217,7 +393,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/GameOfLife.html#Cellular-Automaton-1",
+    "location": "example/GameOfLife/#Cellular-Automaton-1",
     "page": "Game Of Life",
     "title": "Cellular Automaton",
     "category": "section",
@@ -225,7 +401,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/GameOfLife.html#Abstract-1",
+    "location": "example/GameOfLife/#Abstract-1",
     "page": "Game Of Life",
     "title": "Abstract",
     "category": "section",
@@ -233,7 +409,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/GameOfLife.html#Game-of-Life-1",
+    "location": "example/GameOfLife/#Game-of-Life-1",
     "page": "Game Of Life",
     "title": "Game of Life",
     "category": "section",
@@ -241,7 +417,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/GameOfLife.html#D-implementation-1",
+    "location": "example/GameOfLife/#D-implementation-1",
     "page": "Game Of Life",
     "title": "3-D implementation",
     "category": "section",
@@ -249,7 +425,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/platform9_75.html#",
+    "location": "example/platform9_75/#",
     "page": "Platform 9¾",
     "title": "Platform 9¾",
     "category": "page",
@@ -257,7 +433,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "example/platform9_75.html#Platform-9-1",
+    "location": "example/platform9_75/#Platform-9-1",
     "page": "Platform 9¾",
     "title": "Platform 9¾",
     "category": "section",
@@ -265,7 +441,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "blocks.html#",
+    "location": "blocks/#",
     "page": "Block Reference",
     "title": "Block Reference",
     "category": "page",
@@ -273,7 +449,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "blocks.html#Block-Reference-1",
+    "location": "blocks/#Block-Reference-1",
     "page": "Block Reference",
     "title": "Block Reference",
     "category": "section",
@@ -281,7 +457,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.turtle",
+    "location": "api/#PiCraft.turtle",
     "page": "API Reference",
     "title": "PiCraft.turtle",
     "category": "type",
@@ -289,7 +465,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.buildModel-Tuple{Array{Block,3},Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.buildModel-Tuple{Array{Block,3},Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.buildModel",
     "category": "method",
@@ -297,7 +473,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.clearEvents-Tuple{}",
+    "location": "api/#PiCraft.clearEvents-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.clearEvents",
     "category": "method",
@@ -305,7 +481,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.connectToWorld",
+    "location": "api/#PiCraft.connectToWorld",
     "page": "API Reference",
     "title": "PiCraft.connectToWorld",
     "category": "function",
@@ -313,7 +489,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.copyModel-Tuple{Tuple{Real,Real,Real},Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.copyModel-Tuple{Tuple{Real,Real,Real},Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.copyModel",
     "category": "method",
@@ -321,15 +497,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.cutModel-Tuple{Tuple{Real,Real,Real},Tuple{Real,Real,Real},Block}",
+    "location": "api/#PiCraft.cutModel",
     "page": "API Reference",
     "title": "PiCraft.cutModel",
-    "category": "method",
+    "category": "function",
     "text": "cutModel(p1::Tuple{Real, Real, Real}, p2::Tuple{Real, Real, Real}, block::Block)\n\nCopy blocks between diagonally opposite blocks and fill the space with block.\n\n\n\n\n\n"
 },
 
 {
-    "location": "api.html#PiCraft.drawLine",
+    "location": "api/#PiCraft.drawLine",
     "page": "API Reference",
     "title": "PiCraft.drawLine",
     "category": "function",
@@ -337,7 +513,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.flip-Tuple{Array{Block,3},Symbol}",
+    "location": "api/#PiCraft.flip-Tuple{Array{Block,3},Symbol}",
     "page": "API Reference",
     "title": "PiCraft.flip",
     "category": "method",
@@ -345,7 +521,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getBlock-Tuple{Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.getBlock-Tuple{Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.getBlock",
     "category": "method",
@@ -353,7 +529,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getHeight-Tuple{Int64,Int64}",
+    "location": "api/#PiCraft.getHeight-Tuple{Int64,Int64}",
     "page": "API Reference",
     "title": "PiCraft.getHeight",
     "category": "method",
@@ -361,7 +537,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getPlayerIds-Tuple{}",
+    "location": "api/#PiCraft.getPlayerIds-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.getPlayerIds",
     "category": "method",
@@ -369,7 +545,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getPos-Tuple{Int64}",
+    "location": "api/#PiCraft.getPos-Tuple{Int64}",
     "page": "API Reference",
     "title": "PiCraft.getPos",
     "category": "method",
@@ -377,7 +553,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getPos-Tuple{}",
+    "location": "api/#PiCraft.getPos-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.getPos",
     "category": "method",
@@ -385,7 +561,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getTile-Tuple{Int64}",
+    "location": "api/#PiCraft.getTile-Tuple{Int64}",
     "page": "API Reference",
     "title": "PiCraft.getTile",
     "category": "method",
@@ -393,7 +569,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.getTile-Tuple{}",
+    "location": "api/#PiCraft.getTile-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.getTile",
     "category": "method",
@@ -401,15 +577,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.importSchematic-Tuple{IO}",
+    "location": "api/#PiCraft.importSchematic-Tuple{AbstractString}",
     "page": "API Reference",
     "title": "PiCraft.importSchematic",
     "category": "method",
-    "text": "importSchematic(istream::IO)\n\nReads a .schematic file and return a 3 - D matrix of type Array{Block, 3} which represents the schematic.\n\n\n\n\n\n"
+    "text": "importSchematic(filename::AbstractString)\n\nReads a .schematic file and return a 3 - D matrix of type Array{Block, 3}(model) which represents the schematic.\n\n\n\n\n\n"
 },
 
 {
-    "location": "api.html#PiCraft.mc_send",
+    "location": "api/#PiCraft.mc_send",
     "page": "API Reference",
     "title": "PiCraft.mc_send",
     "category": "function",
@@ -417,7 +593,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.move-Tuple{turtle,Real}",
+    "location": "api/#PiCraft.move-Tuple{turtle,Real}",
     "page": "API Reference",
     "title": "PiCraft.move",
     "category": "method",
@@ -425,7 +601,15 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.pitch-Tuple{turtle,Real}",
+    "location": "api/#PiCraft.parseNBT",
+    "page": "API Reference",
+    "title": "PiCraft.parseNBT",
+    "category": "function",
+    "text": "parseNBT(filename::AbstractString, ostream::IO = stdout)\n\nParse a Named Binary tag file.\n\n\n\n\n\n"
+},
+
+{
+    "location": "api/#PiCraft.pitch-Tuple{turtle,Real}",
     "page": "API Reference",
     "title": "PiCraft.pitch",
     "category": "method",
@@ -433,7 +617,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.pollBlockHits-Tuple{}",
+    "location": "api/#PiCraft.pollBlockHits-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.pollBlockHits",
     "category": "method",
@@ -441,7 +625,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.post-Tuple",
+    "location": "api/#PiCraft.post-Tuple",
     "page": "API Reference",
     "title": "PiCraft.post",
     "category": "method",
@@ -449,7 +633,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.restoreWorld-Tuple{}",
+    "location": "api/#PiCraft.restoreWorld-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.restoreWorld",
     "category": "method",
@@ -457,7 +641,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.roll-Tuple{turtle,Real}",
+    "location": "api/#PiCraft.roll-Tuple{turtle,Real}",
     "page": "API Reference",
     "title": "PiCraft.roll",
     "category": "method",
@@ -465,7 +649,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.rotate-Tuple{Array{Block,3},Symbol,Symbol}",
+    "location": "api/#PiCraft.rotate-Tuple{Array{Block,3},Symbol,Symbol}",
     "page": "API Reference",
     "title": "PiCraft.rotate",
     "category": "method",
@@ -473,7 +657,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.saveWorld-Tuple{}",
+    "location": "api/#PiCraft.saveWorld-Tuple{}",
     "page": "API Reference",
     "title": "PiCraft.saveWorld",
     "category": "method",
@@ -481,7 +665,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.setBlock-Tuple{Tuple{Real,Real,Real},Block}",
+    "location": "api/#PiCraft.setBlock-Tuple{Tuple{Real,Real,Real},Block}",
     "page": "API Reference",
     "title": "PiCraft.setBlock",
     "category": "method",
@@ -489,7 +673,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.setBlocks-Tuple{Tuple{Real,Real,Real},Tuple{Real,Real,Real},Block}",
+    "location": "api/#PiCraft.setBlocks-Tuple{Tuple{Real,Real,Real},Tuple{Real,Real,Real},Block}",
     "page": "API Reference",
     "title": "PiCraft.setBlocks",
     "category": "method",
@@ -497,7 +681,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.setPos-Tuple{Int64,Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.setPos-Tuple{Int64,Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.setPos",
     "category": "method",
@@ -505,7 +689,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.setPos-Tuple{Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.setPos-Tuple{Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.setPos",
     "category": "method",
@@ -513,7 +697,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.setTile-Tuple{Int64,Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.setTile-Tuple{Int64,Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.setTile",
     "category": "method",
@@ -521,7 +705,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.setTile-Tuple{Tuple{Real,Real,Real}}",
+    "location": "api/#PiCraft.setTile-Tuple{Tuple{Real,Real,Real}}",
     "page": "API Reference",
     "title": "PiCraft.setTile",
     "category": "method",
@@ -529,7 +713,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.yaw-Tuple{turtle,Real}",
+    "location": "api/#PiCraft.yaw-Tuple{turtle,Real}",
     "page": "API Reference",
     "title": "PiCraft.yaw",
     "category": "method",
@@ -537,7 +721,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.readTAG",
+    "location": "api/#PiCraft.readTAG",
     "page": "API Reference",
     "title": "PiCraft.readTAG",
     "category": "function",
@@ -545,7 +729,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#PiCraft.post-Tuple{string}",
+    "location": "api/#PiCraft.post-Tuple{string}",
     "page": "API Reference",
     "title": "PiCraft.post",
     "category": "method",
@@ -553,7 +737,7 @@ var documenterSearchIndex = {"docs": [
 },
 
 {
-    "location": "api.html#",
+    "location": "api/#",
     "page": "API Reference",
     "title": "API Reference",
     "category": "page",
