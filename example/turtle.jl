@@ -21,6 +21,7 @@
 # `New World -> Creative -> World Type: Superflat -> Customize -> Presets -> The Void -> Create New World`
 # Then we can setup a canvas for drawing as follows:
 
+using PiCraft
 p = getPos()
 setBlocks(p .+ (-50, 0, -50), p .+ (50, 0, 50), Block(35, 15))
 # ![canvasSetup.png](../assets/img/Turtle/canvasSetup.png)
