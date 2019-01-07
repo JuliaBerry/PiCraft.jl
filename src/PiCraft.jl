@@ -10,7 +10,7 @@ include("NBT.jl")
 include("buildTools.jl")
 
 export World, Block, connectToWorld, mc_send, getBlock, setBlock, setBlocks, getHeight, getPlayerIds
-export setting, saveWorld, restoreWorld, post, getTile, setTile, getPos, setPos, pollBlockHits
+export setting, saveWorld, restoreWorld, post, getChatEvents, getTile, setTile, getPos, setPos, pollBlockHits
 export clearEvents, camera
 export turtle, move, yaw, pitch, roll
 export drawLine
