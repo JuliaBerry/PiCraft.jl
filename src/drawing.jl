@@ -7,6 +7,9 @@ Draw a line from point `p1` to point `p2` using `block`.
 
 """
 function drawLine(p1::Tuple{Real,Real,Real}, p2::Tuple{Real,Real,Real}, block::PiCraft.Block = PiCraft.GOLD_BLOCK, width::Real = 1.0)
+    p = p1 = round.(Int, p1)
+    p2 = round.(Int, p2)
+    
     if(width < 1)
         error("Width must be greater than or equal to 1")
     end
@@ -20,8 +23,7 @@ function drawLine(p1::Tuple{Real,Real,Real}, p2::Tuple{Real,Real,Real}, block::P
     else
         setBlock(p, block)
     end
-    p = p1 = round.(Int, p1)
-    p2 = round.(Int, p2)
+    
     Δx, Δy, Δz = p2 .- p1
     δx, δy, δz = ifelse.((Δx, Δy, Δz) .< 0, -1, 1)
     l, m, n = abs.((Δx, Δy, Δz))
