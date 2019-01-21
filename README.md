@@ -1,5 +1,7 @@
 # PiCraft
 
+![PiCraft](./docs/src/assets/img/PiCraft.png)
+
 ### Control a Minecraft world on the Minecraft: Pi or Java edition from Julia
 
 PiCraft is a Julia package which allows control over the Minecraft World using code. It is compatible with the Minecraft: Pi Edition and the Java Edition with the help of RaspberryJamMod or RaspberryJuice.
@@ -9,7 +11,10 @@ With this package you will be able to :
 - Write scripts to teleport and walk over Water and Lava.
 - Construct multi-storey skyscrapers within seconds.
 - Draw fractals and shapes using a 3-D turtle.
-- Import and export `.schematic` models without external software.  
+- Import and export `.schematic` models without external software.
+
+The above examples and more is in the documentation which can be accessed
+[here]( https://juliaberry.github.io/PiCraft.jl/).
 
 ## Installation and Usage
 
@@ -27,7 +32,8 @@ Officially the ability to communicate with the Minecraft world is only available
 
 ### Get Julia
 
-Download the appropriate Julia version for your system from [here](https://julialang.org/downloads/).
+Download the appropriate Julia version for your system from [here](https://julialang.org/downloads/). If you are on a raspberry pi you should follow the instructions
+given in the documentation [here](https://juliaberry.github.io/PiCraft.jl/installation/#Install-Julia-1).
 
 ### Install the PiCraft package
 
@@ -39,6 +45,8 @@ Pkg.add("https://github.com/JuliaBerry/PiCraft.jl")
 ### Documentation
 
 Documentation for this package can be accessed at https://juliaberry.github.io/PiCraft.jl/
+The documentation consists of a setup instructions, basic tutorials, examples and
+reference pages.
 
 ## Quick Start Guide
 
@@ -47,9 +55,9 @@ Load the `PiCraft` package on the Julia console:
 using PiCraft
 ```
 
-On load, the library will attempt to connect to a running Minecraft world on `localhost`. If Minecraft is not running, an error message will be printed. Subsequently, once Minecraft has been started,  a connection can be forced by calling `connectToWorld()`.
+On load, the library will attempt to connect to a running Minecraft world on `localhost`. If Minecraft is not running, an error message will be printed. Subsequently, once Minecraft has been started, a connection can be forced by calling `connectToWorld()`.
 
-A 3-D coordinate system is used to describe the Minecraft world. Every position in the Minecraft World can be described with the help of 3 numbers. The X, Y and Z coordinates. These coordinates can be viewed by opening the Debug screen using `F3`.
+A 3-D coordinate system is used to describe the Minecraft world. Every position in the Minecraft World can be described with the help of 3 numbers. The X, Y and Z coordinates. These coordinates can be viewed by opening the Debug screen pressing the `F3` key.
 
 ![debug-screen](./docs/src/assets/img/coordinates.png)
 
@@ -60,7 +68,7 @@ You can find and set your player's location:
 2) Set Player position: `setPos(pos::Tuple{Float64, Float64, Float64})`
       * Teleports the player to the specified coordinates.
 
-For example : `setPos(getPos .+ (0, 10, 0))` will teleport you 10m above you current position.
+For example : `setPos(getPos() .+ (0, 10, 0))` will teleport you 10m above you current position.
 
 ### Blocks
 Blocks are the heart of Minecraft. The package provides the ability to modify blocks at specified coordinates.
@@ -83,22 +91,9 @@ The `id` defines the type of block (like cobblestone, wool, wood,.etc) and the `
 
 While the `getBlock` and `setBlock` functions will accept `Float64` as arguments these will be rounded and set to `Int` as a block cannot be placed on non-integer coordinates.
 
- ## Reference
+### Contributing
 
-```julia
-
-getBlock(Tuple{Int,Int,Int}) # retrive a Block object at the specified coordinates
-setBlock(Tuple{Int,Int,Int}, block::Picraft.Block) #set the specified Block to these coordinates
-setBlocks(pos::Tuple{UnitRange{Int}, UnitRange{Int}, UnitRange{Int}}, block::PiCraft.Block) #set a block to an entire region
-getHeight(x::Int, z::Int) #Get the height of the world at the specified `x` and `z` coordinates.
-getPlayerIds() # Return an array of all Player Id's connected to the server.
-setting(name, status) #Change a setting
-save() #save the current world state
-restore() #restore the world to the previously saved world state
-post(s::string) #send string s to chat
-getTile() # return a tuple of integers (x, y, z),  for the tile on which the player is placed
-setTile(pos::Tuple{Real, Real, Real}) # move the player to the tile specified by the integer coordinates
-getPos() # return a tuple of floats (x, y, z) with the player's position
-setPos(pos::Tuple{Real, Real, Real}) # move the player to the specified coordinates
-pollBlockHits() #Return an Array of hit events. ((x,y,z), faceId, entityId)
-```
+Contributions and bug reports are welcome! If you want to share some of your work,
+have a query or an example to share you can post on the #PiCraft channel on
+julialang's [slack](https://julialang.slack.com) or open an issue on the
+PiCraft [github page](https://github.com/JuliaBerry/PiCraft.jl/issues) directly.

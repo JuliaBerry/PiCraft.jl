@@ -32,10 +32,6 @@ end
 
 global const minecraftWorld = Ref{World}()
 
-function __init__()
-    minecraftWorld[] = World()
-end
-
 """
     connectToWorld(address = "localhost", port = 4711)
 
