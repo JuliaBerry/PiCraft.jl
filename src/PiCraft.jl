@@ -3,6 +3,8 @@ module PiCraft
 using Sockets
 using GZip
 
+import LinearAlgebra
+
 include("blocks.jl")
 include("turtle.jl")
 include("drawing.jl")
