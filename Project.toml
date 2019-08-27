@@ -1,6 +1,6 @@
 name = "PiCraft"
 uuid = "6cc4b21d-cec8-58d5-a373-5cd579ce5971"
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 GZip = "92fee26a-97fe-5a0c-ad85-20a5f3185b63"
