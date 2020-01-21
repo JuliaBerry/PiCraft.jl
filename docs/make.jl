@@ -32,6 +32,7 @@ makedocs(
             "Sky Scraper" => "example/skyscraperBasic.md",
             "Game Of Life" => "example/GameOfLife.md",
             "Platform 9¾" => "example/platform9_75.md"
+            "Whac-a-Block" => "whacABlock.md"
        ],
        "Block Reference" => "blocks.md",
        "API Reference" => "api.md"
