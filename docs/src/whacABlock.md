@@ -331,5 +331,5 @@ Now you're all set! Thanks for reading!
 
 ### written by kfung
 
-## Reference:
+### Reference:
 Some images are from the [Whac-A-Block Game worksheet on raspberrypi.org](https://www.raspberrypi.org/learning/minecraft-whac-a-block-game/worksheet/) under CC BY-SA.
