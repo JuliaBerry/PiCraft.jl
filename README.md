@@ -1,41 +1,54 @@
 # PiCraft
 
+| **Documentation**    |
+| :------------------: |
+|[![documentation][docs-img]](https://github.com/JuliaBerry/PiCraft.jl) |
+
+[docs-img]: https://img.shields.io/badge/docs-latest-blue.svg
+
 ![PiCraft](./docs/src/assets/img/PiCraft.png)
 
 ### Control a Minecraft world on the Minecraft: Pi or Java edition from Julia
 
 PiCraft is a Julia package which allows control over the Minecraft World using code. It is compatible with the Minecraft: Pi Edition and the Java Edition with the help of RaspberryJamMod or RaspberryJuice.
 
-With this package you will be able to :
+Programming in the Minecraft world can be very beneficial in constructing large scale
+projects which can be automated and this can also be a fun way to introduce programming
+ to children.
+
+Some sample projects available in the documentation are:
 
 - Write scripts to teleport and walk over Water and Lava.
 - Construct multi-storey skyscrapers within seconds.
 - Draw fractals and shapes using a 3-D turtle.
 - Import and export `.schematic` models without external software.
 
-The above examples and more is in the documentation which can be accessed
-[here]( https://juliaberry.github.io/PiCraft.jl/).
-
 ## Installation and Usage
 
 ### Get Minecraft
 
-- The Minecraft: Pi edition is pre-installed on all Rasbian since September 2014. Launch it by navigating to **Menu** > **Games** or typing **minecraft-pi** in the terminal. However, if you are running an older version of Raspbian get it [here](https://minecraft.net/en-us/edition/pi/).
+- The Minecraft: Pi edition is pre-installed on all Rasbian since 2014. Launch it by navigating to **Menu** > **Games** or typing **minecraft-pi** in the terminal. However, if you are running an older version of Raspbian get it [here](https://minecraft.net/en-us/edition/pi/).
 - Get the Minecraft: Java edition(MacOS, Linux and Windows) [here](https://minecraft.net/en-us/download/alternative).
 
 ### Get RaspberryJuice or RaspberryJamMod (for Minecraft: Java edition)
 
-Officially the ability to communicate with the Minecraft world is only available for the Minecraft: Pi edition. To get this to work on the Java edition we need to install a Mod.
+Officially the ability to communicate with the Minecraft world is only available for the Minecraft: Pi edition. To get this to work on the Java edition we need to install a Mod. Detailed instructions can be found [here](https://juliaberry.github.io/PiCraft.jl/#Installation-1)
 
 - "RaspberryJamMod" is a Forge Mod, if you wish to use this along with other Forge mods then this is recommended. Installation instructions are available [here](http://www.instructables.com/id/Python-coding-for-Minecraft/).
 - "RaspberryJuice" is a Bukkit server plugin, recommended if you wish to work on a Bukkit Minecraft server. Get it [here](https://dev.bukkit.org/projects/raspberryjuice).
 
 ### Get Julia
 
-Download the appropriate Julia version for your system from [here](https://julialang.org/downloads/). If you are on a raspberry pi you should follow the instructions
-given in the documentation [here](https://juliaberry.github.io/PiCraft.jl/installation/#Install-Julia-1).
+Download the appropriate Julia version for your system from [here](https://julialang.org/downloads/). 
+If you are on a raspberry pi you should follow the instructions given in the documentation 
+[here](https://juliaberry.github.io/PiCraft.jl/installation/#Install-Julia-1).
 
 ### Install the PiCraft package
+
+```julia
+]add PiCraft
+```
+**OR**
 
 ```julia
 using Pkg
@@ -93,7 +106,7 @@ While the `getBlock` and `setBlock` functions will accept `Float64` as arguments
 
 ### Contributing
 
-Contributions and bug reports are welcome! If you want to share some of your work,
-have a query or an example to share you can post on the #PiCraft channel on
-julialang's [slack](https://julialang.slack.com) or open an issue on the
-PiCraft [github page](https://github.com/JuliaBerry/PiCraft.jl/issues) directly.
+Contributions, feature requests and bug reports are welcome! If you want to share some of your work or
+have a query you can post on the #PiCraft channel on julialang's [slack](https://julialang.slack.com)
+ (get an invite from <https://slackinvite.julialang.org> ) or open an issue on the PiCraft 
+ [github page](https://github.com/JuliaBerry/PiCraft.jl/issues) directly.
