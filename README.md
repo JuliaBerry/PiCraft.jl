@@ -2,7 +2,7 @@
 
 | **Documentation**    |
 | :------------------: |
-|[![documentation][docs-img]](https://github.com/JuliaBerry/PiCraft.jl) |
+|[![documentation][docs-img]](https://juliaberry.github.io/PiCraft.jl/) |
 
 [docs-img]: https://img.shields.io/badge/docs-latest-blue.svg
 
