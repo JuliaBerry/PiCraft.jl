@@ -5,7 +5,7 @@ Well, that's what we're going to be doing today! Our game is called "Whac-a-Bloc
 
 The objective of this game is quite simple: it's simply to whack the blocks that light up as glowstone with a sword, and turn them back to stone. You will earn points for each block you turn back to stone! The game is over when all the blocks have been turned into glowstone.
 
-![img](./assets/img/WhacABlock/whack1.png)
+![img](assets/img/WhacABlock/whack1.png)
 
 **Check out [this YouTube video](https://youtu.be/WaqCf9CVsfY) for a quick demonstration of the game!**
 
@@ -70,7 +70,7 @@ To test, first connect using the ```connectToWorld(address, port = 4711)``` func
 
 Now, you can go the the directory you would like to save the program and open a new Julia file called `whack.jl`. Make sure it is saved properly. Then, you may enter `post("Welcome to Minecraft Whac-a-Block")` and see the following result:
 
-![img](./assets/img/WhacABlock/whack2.jpeg)
+![img](assets/img/WhacABlock/whack2.jpeg)
 
 ## Step 3: Building the game board
 
@@ -88,7 +88,7 @@ Then we can use the `setBlocks()` function to create the game board out of stone
 setBlocks(tile .+ (-1, 0, 3), tile .+ (1, 2, 3), Block(1))
 ```
 
-![img](./assets/img/WhacABlock/whack3.png)
+![img](assets/img/WhacABlock/whack3.png)
 
 From now on, please wrap everything we do with a function called `main()` and call it when you run it. This is important because of how the scoping works in Julia with different variables. See [this Discourse thread](https://discourse.julialang.org/t/confused-about-global-vs-local-scoping-in-for-loops-in-1-0/16318/7) for more details.
 
@@ -142,7 +142,7 @@ Now, once there's a block that has turned to glowstone, `lightCreated` will be s
       zpos = tile[3] + 3
 ```
 
-![img](./assets/img/WhacABlock/whack4.png)
+![img](assets/img/WhacABlock/whack4.png)
 
 Use `getBlock(x,y,z)` and an if statement to check if the block at the random position is stone. If it is, set it to glowstone using `setBlock(x,y,z,blockId)` and make `lightCreated = true`; if this is not changed, the code will go back to the start of the loop and find another random position.
 
@@ -158,7 +158,7 @@ Now you can run the program again. This time you should see the board appearing 
 
 ## Step 5: Adding the "whacking" functionality
 
-![img](./assets/img/WhacABlock/whack5.jpeg)
+![img](assets/img/WhacABlock/whack5.jpeg)
 
 Now, we would like to know whether the player has "whacked" a block or not. Luckily, PiCraft.jl has a function that allows you to find out what blocks have been hit. These are called Hit Events and can be found out using the `pollBlockHits()` function, which returns an array of these events. Each event is described by a tuple `((x, y, z), face, entityId)` and the `x,y,z` values describe the position of the block that got hit.
 
@@ -191,7 +191,7 @@ Now, you can let everyone know that the game is over (when all 9 blocks are lit)
 post("Game Over: You have scored ", string(points), " points!")
 ```
 
-![img](./assets/img/WhacABlock/whack6.jpeg)
+![img](assets/img/WhacABlock/whack6.jpeg)
 
 **Congratulations!**
 
