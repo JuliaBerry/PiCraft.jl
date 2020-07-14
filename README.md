@@ -1,9 +1,10 @@
 # PiCraft
 
-| **Documentation**    |
-| :------------------: |
-|[![documentation][docs-img]](https://juliaberry.github.io/PiCraft.jl/) |
+| **Latest Release**  | **Documentation**    |
+| :------------------:| :------------------: |
+| [![version][ver-img]](https://juliahub.com/ui/Packages/PiCraft/mVPQO)|[![documentation][docs-img]](https://juliaberry.github.io/PiCraft.jl/) |
 
+[ver-img]: https://juliahub.com/docs/PiCraft/version.svg
 [docs-img]: https://img.shields.io/badge/docs-latest-blue.svg
 
 ![PiCraft](./docs/src/assets/img/PiCraft.png)
