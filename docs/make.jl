@@ -1,20 +1,19 @@
 using Documenter, PiCraft
 using Literate
 
-load_dir(x) = map(file -> joinpath("lib", x, file), readdir(joinpath(Base.source_dir(), "src", "lib", x)))
+examples = ["safeFeet", "turnToGold", "turtle", "skyscraperBasic", "GameOfLife",
+            "platform9_75"]
 
-
-Literate.markdown("../example/safeFeet.jl", "src/example"; documenter=true)
-Literate.markdown("../example/turnToGold.jl", "src/example"; documenter=true)
-Literate.markdown("../example/turtle.jl", "src/example"; documenter=true)
-Literate.markdown("../example/skyscraperBasic.jl", "src/example"; documenter=true)
-Literate.markdown("../example/GameOfLife.jl", "src/example"; documenter=true)
-Literate.markdown("../example/platform9_75.jl", "src/example"; documenter=true)
-Literate.markdown("../example/GameOfLife.jl", "src/example"; documenter=true)
+for eg in examples
+    file_path = "../example/" * eg * ".jl"
+    out_path = "src/example"
+    Literate.markdown(file_path, out_path; documenter=false, execute=false)
+end
 
 makedocs(
    modules = [PiCraft],
-   clean = false,
+   format = Documenter.HTML(prettyurls = get(ENV, "CI", nothing) == "true"),
+   clean = true,
    sitename = "PiCraft",
    pages = Any[
        "Home" => "index.md",
@@ -31,13 +30,12 @@ makedocs(
             "Turtle" => "example/turtle.md",
             "Sky Scraper" => "example/skyscraperBasic.md",
             "Game Of Life" => "example/GameOfLife.md",
-            "Platform 9¾" => "example/platform9_75.md"
+            "Platform 9¾" => "example/platform9_75.md",
             "Whac-a-Block" => "whacABlock.md"
        ],
        "Block Reference" => "blocks.md",
        "API Reference" => "api.md"
-   ],
-   assets = ["assets/custom.css"]
+   ]
 )
 
 deploydocs(
