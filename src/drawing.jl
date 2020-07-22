@@ -1,3 +1,5 @@
+export drawLine
+
 # drawLine using Bresenham's Line algorithm (3-D implementation)
 """
     drawLine(p1::Tuple{Real,Real,Real}, p2::Tuple{Real,Real,Real}, block::PiCraft.Block = PiCraft.GOLD_BLOCK, width::Real = 1)
