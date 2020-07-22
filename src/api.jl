@@ -2,6 +2,25 @@ export World, connectToWorld, mc_send, getBlock, setBlock, setBlocks, getHeight,
 export setting, saveWorld, restoreWorld, post, getChatEvents, getTile, setTile, getPos, setPos, pollBlockHits
 export clearEvents, camera
 
+mutable struct World
+    s::Sockets.TCPSocket
+    function World()
+        try
+            s = Sockets.connect("localhost", 4711)
+            new(s)
+        catch
+            @warn("Unable to connect to Minecraft World. Use `connectToWorld()` after starting Minecraft")
+            new(TCPSocket())
+        end
+    end
+    World()
+end
+
+global const minecraftWorld = Ref{World}()
+
+function __init__()
+    minecraftWorld[] = World()
+end
 
 """
     connectToWorld(address = "localhost", port = 4711)
@@ -116,7 +135,7 @@ restoreWorld() = PiCraft.mc_send("world.checkpoint.restore()", false)
 Post a message to chat
 """
 function post(m...)
-    s = reduce(*, m...)
+    s = reduce(*, [m...])
     PiCraft.mc_send("chat.post($(s)", false)
 end
 
