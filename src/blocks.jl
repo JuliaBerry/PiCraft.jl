@@ -1,7 +1,4 @@
-struct Block
-    id::Int
-    data::Int
-end
+export Block
 
 Block(id::Int) = Block(id, 0)
 

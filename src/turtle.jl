@@ -1,5 +1,7 @@
 using LinearAlgebra: normalize, cross
 
+export turtle, move, yaw, pitch, roll
+
 """
     turtle
 

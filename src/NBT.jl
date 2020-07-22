@@ -20,6 +20,8 @@
 # We don't differentiate between Named and Nameless files. Nameless Tags are
 # Named Tags with an empty string as their name.
 
+export parseNBT, importSchematic, exportSchematic
+
 abstract type NBTag end
 
 struct TAG_End <: NBTag
@@ -226,20 +228,20 @@ end
 Parse a Named Binary tag file.
 """
 function parseNBT(filename::AbstractString, ostream::IO = stdout)
-istream = open(filename)
-t = read(istream, UInt16)
-close(istream)
-if t == 0x8b1f #Starting bytes of a GZip file, note the endian
-    istream = GZip.open(filename)
-else
     istream = open(filename)
-end
+    t = read(istream, UInt16)
+    close(istream)
+    if t == 0x8b1f #Starting bytes of a GZip file, note the endian
+        istream = GZip.open(filename)
+    else
+        istream = open(filename)
+    end
 
-while !(eof(istream))
-    printTAG(readTAG(istream), ostream, 0)
-end
-close(istream)
-return 0
+    while !(eof(istream))
+        printTAG(readTAG(istream), ostream, 0)
+    end
+    close(istream)
+    return
 end
 
 """
