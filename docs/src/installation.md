@@ -1,19 +1,17 @@
 # Installation
 
-## Install Minecraft(+Mod/Plugin)
-
-### Minecraft: Pi
+## Minecraft: Pi
 
 Minecraft: Pi is free and comes pre-installed on all Rasbian since September 2014.
 Launch it by navigating to `Menu` *>* `Games` or typing `minecraft-pi` in the terminal.
 However, if you are running an older version of Raspbian get the game [here](https://minecraft.net/en-us/edition/pi/).
 Refer to the same link if you are unable to launch it.
 
-Note that Minecraft: Pi can seem limited compared to the Java version. If you have
+Note that Minecraft: Pi is limited compared to the Java version. If you have
 a powerful computer and access to a Minecraft: Java license then you should consider
-using that platform.
+using that platform for a better experience.
 
-### Minecraft: Java
+## Minecraft: Java
 
 Minecraft: Java can be purchased and downloaded [here](https://minecraft.net).
 Follow the installation instructions provided there. The Java edition works on
@@ -23,11 +21,14 @@ to run `PiCraft`.
 ### RaspberryJamMod
 
 This is a [forge mod](https://minecraft.gamepedia.com/Mods/Forge). The package is
-hosted [here](https://github.com/arpruss/raspberryjammod).
+hosted [here](https://github.com/arpruss/raspberryjammod). The last version of 
+RaspberryJamMod is for forge 1.12 so we will need that first. [Download link](http://files.minecraftforge.net/maven/net/minecraftforge/forge/index_1.12.2.html).
 
-First we need to install Forge which can be found [here](https://files.minecraftforge.net/).
-If you are on windows then download the `Windows Installer` else download the `Installer`.
-Simply run the windows installer and follow the instructions on screen.
+![forge_download](./assets/img/installation/forge_download.png)
+
+Download the installer. The installer requires Java so incase your computer does not recognise it
+download the latest version of Java [here](https://www.java.com/en/download/). On windows you 
+can directly run the installer, on linux/mac if you can't 
 
 On linux/macOS the installer will be named something like *forge-1.12.2-14.23.4.2749-installer.jar*
 
@@ -35,15 +36,18 @@ To run the installer open the Terminal from Applications and head over to the di
 where the installer is present. Then run it by doing the follows:
 
 ```
-cd Documents
-jar -jar forge-1.12.2-14.23.4.2749-installer.jar
+cd Downloads
+java -jar forge-1.12.2-14.23.4.2854-installer.jar
 ```
+
+![installer](./assets/img/installation/forge_installer.png)
 
 Click Install client then click OK.
 Upon completion Forge should be installed.
 
 Now we need to install the mod. For this download the [mods.zip](https://github.com/arpruss/raspberryjammod/raw/master/mods.zip)
-file from the RaspberryJamMod github page.
+file from the RaspberryJamMod github page. The `mods.zip` folder consists of many folders, open the folder
+1.12.2 and it should contain a single file named `RaspberryJamMod.jar`.
 
 To install the mod we need to extract it to the mods folder in the minecraft directory.
 The location for the the *.minecraft* directory for each OS is given below.
@@ -54,10 +58,13 @@ The location for the the *.minecraft* directory for each OS is given below.
 |macOS|~/Library/Application Support/minecraft|
 |Linux|~/.minecraft|
 
-Now head over to this location and create a folder named **mods**. Copy the previously
-downloaded **mods.zip** file here and extract it. The mod is now installed.
+Now head over to this location and create a folder named **mods** if it does not exist.
+ Copy the extracted folder `1.12.2`. The mod is now installed.
 
-Next time you launch Minecraft select the forge version.
+Next time you launch Minecraft select forge 1.12.2 when starting. This can be done by
+going to the installations tab and selecting Forge 1.12.2.
+
+![minecraft_load_mod](./assets/img/installation/minecraft_load_mod.png)
 
 ### RaspberryJuice
 
