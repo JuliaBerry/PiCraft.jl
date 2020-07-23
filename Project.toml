@@ -6,3 +6,6 @@ version = "0.3.0"
 GZip = "92fee26a-97fe-5a0c-ad85-20a5f3185b63"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 Sockets = "6462fe0b-24de-5631-8697-dd941f90decc"
+
+[compat]
+julia = "1"
